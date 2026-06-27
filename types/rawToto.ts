@@ -1,0 +1,20 @@
+export type RawTotoMatch = {
+  totoRound: string;
+  matchNo: string | number;
+  kickoffAt: string;
+  venue: string;
+  homeShortName: string;
+  awayShortName: string;
+  homeRank: string | number;
+  awayRank: string | number;
+  homeRecentPoints: string | number;
+  awayRecentPoints: string | number;
+  homeGoalDiff: string | number;
+  awayGoalDiff: string | number;
+  homeWinRate: string | number;
+  awayWinRate: string | number;
+  voteHome?: string | number;
+  voteDraw?: string | number;
+  voteAway?: string | number;
+  weather?: string;
+};
