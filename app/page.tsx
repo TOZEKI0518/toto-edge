@@ -1,32 +1,25 @@
-const matches = [
-  {
-    id: 1,
-    home: "鹿島",
-    away: "神戸",
+import { sampleMatches } from "@/data/sampleMatches";
+
+  const matches = sampleMatches.map((match) => ({
+    id: match.matchNo,
+    home: match.homeTeam.shortName,
+    away: match.awayTeam.shortName,
     prediction: "HOME WIN",
-    probability: 72,
-    edge: 18,
-    confidence: "A",
-  },
-  {
-    id: 2,
-    home: "横浜FM",
-    away: "川崎",
-    prediction: "DRAW RISK",
-    probability: 41,
-    edge: 9,
-    confidence: "B",
-  },
-  {
-    id: 3,
-    home: "浦和",
-    away: "FC東京",
-    prediction: "HOME WIN",
-    probability: 58,
-    edge: 12,
+    probability: Math.round(
+      50 +
+        (match.awayStats.rank - match.homeStats.rank) * 2 +
+        (match.homeStats.recentFormPoints - match.awayStats.recentFormPoints)
+    ),
+    edge: match.voteRates
+      ? Math.round(
+          50 +
+            (match.awayStats.rank - match.homeStats.rank) * 2 +
+            (match.homeStats.recentFormPoints - match.awayStats.recentFormPoints) -
+            match.voteRates.home
+        )
+      : 0,
     confidence: "B+",
-  },
-];
+  }));
 
 export default function Home() {
   const bestPick = matches[0];

@@ -1,33 +1,77 @@
-export type Outcome = "home" | "draw" | "away";
-export type TeamStats = {
+export type MatchResult = "HOME" | "DRAW" | "AWAY" | "UNKNOWN";
+
+export type PredictionPick = "HOME" | "DRAW" | "AWAY";
+
+export type ConfidenceRank = "S" | "A" | "B+" | "B" | "C";
+
+export type Team = {
+  id: string;
   name: string;
+  shortName: string;
+  league: "J1" | "J2" | "J3";
+};
+
+export type TeamStats = {
+  teamId: string;
   rank: number;
   points: number;
-  last5: string;
+  wins: number;
+  draws: number;
+  losses: number;
   goalsFor: number;
   goalsAgainst: number;
-  homeWinRate?: number;
-  awayWinRate?: number;
-  restDays: number;
-  injuryLevel: number;
+  goalDifference: number;
+  homeWinRate: number;
+  awayWinRate: number;
+  recentFormPoints: number;
 };
+
 export type TotoMatch = {
-  id: number;
-  round: string;
-  kickoff: string;
-  league: string;
+  id: string;
+  totoRound: string;
+  matchNo: number;
+  kickoffAt: string;
   venue: string;
-  weather: "晴" | "曇" | "雨" | "強雨";
-  home: TeamStats;
-  away: TeamStats;
-  voteRate: Record<Outcome, number>;
+  homeTeam: Team;
+  awayTeam: Team;
+  homeStats: TeamStats;
+  awayStats: TeamStats;
+  weather?: {
+    condition: string;
+    temperature: number;
+    windSpeed: number;
+  };
+  voteRates?: {
+    home: number;
+    draw: number;
+    away: number;
+  };
+  result?: {
+    homeScore: number;
+    awayScore: number;
+    outcome: MatchResult;
+  };
 };
-export type Reason = { label: string; value: number; note: string };
-export type Prediction = {
-  matchId: number;
-  probabilities: Record<Outcome, number>;
-  pick: Outcome;
-  confidence: "S" | "A" | "B" | "C";
-  edge: number;
-  reasons: Reason[];
+
+export type PredictionReason = {
+  label: string;
+  impact: number;
+  description: string;
+};
+
+export type MatchPrediction = {
+  matchId: string;
+  pick: PredictionPick;
+  confidence: ConfidenceRank;
+  probabilities: {
+    home: number;
+    draw: number;
+    away: number;
+  };
+  expectedValues?: {
+    home: number;
+    draw: number;
+    away: number;
+  };
+  reasons: PredictionReason[];
 };
