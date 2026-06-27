@@ -1,25 +1,20 @@
 import { sampleMatches } from "@/data/sampleMatches";
+import { calculatePrediction, getPickLabel } from "@/lib/predictionEngine";
 
-  const matches = sampleMatches.map((match) => ({
-    id: match.matchNo,
-    home: match.homeTeam.shortName,
-    away: match.awayTeam.shortName,
-    prediction: "HOME WIN",
-    probability: Math.round(
-      50 +
-        (match.awayStats.rank - match.homeStats.rank) * 2 +
-        (match.homeStats.recentFormPoints - match.awayStats.recentFormPoints)
-    ),
-    edge: match.voteRates
-      ? Math.round(
-          50 +
-            (match.awayStats.rank - match.homeStats.rank) * 2 +
-            (match.homeStats.recentFormPoints - match.awayStats.recentFormPoints) -
-            match.voteRates.home
-        )
-      : 0,
-    confidence: "B+",
-  }));
+  const matches = sampleMatches.map((match) => {
+    const prediction = calculatePrediction(match);
+    const pickKey = prediction.pick.toLowerCase() as "home" | "draw" | "away";
+
+    return {
+      id: match.matchNo,
+      home: match.homeTeam.shortName,
+      away: match.awayTeam.shortName,
+      prediction: getPickLabel(prediction.pick),
+      probability: prediction.probabilities[pickKey],
+      edge: prediction.expectedValues?.[pickKey] ?? 0,
+      confidence: prediction.confidence,
+    };
+  });
 
 export default function Home() {
   const bestPick = matches[0];
