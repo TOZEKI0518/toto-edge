@@ -1,15 +1,19 @@
 import { getTotoLivePageSummary } from "@/services/totoLiveService";
-import { getYahooTotoRounds } from "@/services/yahooTotoService";
+import {
+  getLatestYahooTotoRound,
+  getYahooTotoRounds,
+} from "@/services/yahooTotoService";
 
 export default async function DebugPage() {
-  const [sources, rounds] = await Promise.all([
-    Promise.all([
-      getTotoLivePageSummary("rakutenSchedule"),
-      getTotoLivePageSummary("yahooSchedule"),
-      getTotoLivePageSummary("jleagueMatches"),
-      getTotoLivePageSummary("jleagueStandings"),
-    ]),
-    getYahooTotoRounds(),
+  const [sources, rounds, latestRound] = await Promise.all([
+  Promise.all([
+    getTotoLivePageSummary("rakutenSchedule"),
+    getTotoLivePageSummary("yahooSchedule"),
+    getTotoLivePageSummary("jleagueMatches"),
+    getTotoLivePageSummary("jleagueStandings"),
+  ]),
+  getYahooTotoRounds(),
+  getLatestYahooTotoRound(),
   ]);
 
   return (
@@ -17,6 +21,21 @@ export default async function DebugPage() {
       <div className="mx-auto max-w-5xl">
         <p className="text-sm text-cyan-300">Debug</p>
         <h1 className="mt-2 text-3xl font-bold">TOTO Data Debug</h1>
+
+        {latestRound && (
+          <section className="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-6">
+            <p className="text-sm text-cyan-300">Latest Round</p>
+            <h2 className="mt-2 text-3xl font-bold">{latestRound.round}</h2>
+            <p className="mt-2 text-white/70">
+              {latestRound.salesStart} - {latestRound.salesEnd}
+            </p>
+            <p className="mt-3">
+              <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">
+                {latestRound.status}
+              </span>
+            </p>
+          </section>
+        )}
 
         <section className="mt-6">
           <h2 className="text-xl font-bold">Source Fetch Status</h2>
