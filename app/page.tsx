@@ -1,51 +1,119 @@
-import { EdgeRanking } from "@/components/EdgeRanking";
-import { MatchCard } from "@/components/MatchCard";
-import { sampleMatches } from "@/data/sampleMatches";
-import { mapDbMatch } from "@/lib/db-mapper";
-import { supabaseSelect } from "@/lib/supabase-rest";
-import type { TotoMatch } from "@/types/toto";
+const matches = [
+  {
+    id: 1,
+    home: "鹿島",
+    away: "神戸",
+    prediction: "HOME WIN",
+    probability: 72,
+    edge: 18,
+    confidence: "A",
+  },
+  {
+    id: 2,
+    home: "横浜FM",
+    away: "川崎",
+    prediction: "DRAW RISK",
+    probability: 41,
+    edge: 9,
+    confidence: "B",
+  },
+  {
+    id: 3,
+    home: "浦和",
+    away: "FC東京",
+    prediction: "HOME WIN",
+    probability: 58,
+    edge: 12,
+    confidence: "B+",
+  },
+];
 
-async function loadMatches(): Promise<{ matches: TotoMatch[]; mode: string; round: string }> {
-  try {
-    const rows = await supabaseSelect<any>(
-      "matches",
-      "select=*&order=round_no.desc,match_no.asc&limit=13"
-    );
-    if (rows.length > 0) {
-      const matches = rows.map(mapDbMatch);
-      return { matches, mode: "Supabase連携", round: matches[0].round };
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return { matches: sampleMatches, mode: "サンプルデータ", round: sampleMatches[0].round };
-}
-
-export default async function Home() {
-  const { matches, mode, round } = await loadMatches();
+export default function Home() {
+  const bestPick = matches[0];
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,#064e3b_0,#020617_34%,#020617_100%)] px-4 py-8 md:px-8">
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+    <main className="min-h-screen bg-[#05060A] text-white">
+      <div className="mx-auto max-w-6xl px-5 py-8">
+        <header className="mb-8 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold tracking-[0.35em] text-emerald-300">TOTO EDGE</p>
-            <h1 className="mt-3 text-4xl font-black text-white md:text-6xl">期待値で選ぶ<br className="md:hidden" />toto分析MVP</h1>
-            <p className="mt-4 max-w-2xl text-slate-300">勝敗を単純に当てるのではなく、AI予想確率と投票率のズレから「狙い目」を見つけます。Supabase未設定時はサンプルデータで表示します。</p>
+            <p className="text-sm text-cyan-300">AI Football Forecast</p>
+            <h1 className="mt-1 text-3xl font-bold tracking-tight">
+              TOTO EDGE
+            </h1>
           </div>
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-4 text-sm text-slate-300">
-            <p>対象回：<span className="font-bold text-white">{round}</span></p>
-            <p>試合数：<span className="font-bold text-white">{matches.length}試合</span></p>
-            <p>モード：<span className="font-bold text-emerald-300">{mode}</span></p>
+
+          <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+            Ver 0.1
           </div>
         </header>
 
-        <div className="mb-6">
-          <EdgeRanking matches={matches} />
-        </div>
+        <section className="mb-8 rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-purple-500/20 p-6 shadow-2xl">
+          <p className="mb-2 text-sm text-white/60">Today&apos;s Best Pick</p>
 
-        <section className="grid gap-5 lg:grid-cols-2">
-          {matches.map((match) => <MatchCard key={`${match.round}-${match.id}`} match={match} />)}
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 className="text-4xl font-bold">
+                {bestPick.home} vs {bestPick.away}
+              </h2>
+              <p className="mt-3 text-cyan-200">{bestPick.prediction}</p>
+            </div>
+
+            <div className="text-right">
+              <p className="text-6xl font-black">{bestPick.probability}%</p>
+              <p className="mt-2 text-sm text-white/60">
+                Expected Value +{bestPick.edge}%
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-xl font-bold">Match Predictions</h3>
+            <p className="text-sm text-white/50">第XXXX回 toto</p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {matches.map((match) => (
+              <article
+                key={match.id}
+                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07]"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/60">
+                    Match {match.id}
+                  </span>
+                  <span className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300">
+                    Confidence {match.confidence}
+                  </span>
+                </div>
+
+                <h4 className="text-xl font-bold">
+                  {match.home} vs {match.away}
+                </h4>
+
+                <div className="mt-5">
+                  <div className="mb-2 flex justify-between text-sm">
+                    <span className="text-white/60">{match.prediction}</span>
+                    <span>{match.probability}%</span>
+                  </div>
+                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-cyan-300"
+                      style={{ width: `${match.probability}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-2xl bg-black/30 p-4">
+                  <p className="text-sm text-white/50">Expected Value</p>
+                  <p className="mt-1 text-2xl font-bold text-cyan-300">
+                    +{match.edge}%
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
       </div>
     </main>
