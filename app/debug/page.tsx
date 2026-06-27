@@ -6,14 +6,14 @@ import {
 
 export default async function DebugPage() {
   const [sources, rounds, latestRound] = await Promise.all([
-  Promise.all([
-    getTotoLivePageSummary("rakutenSchedule"),
-    getTotoLivePageSummary("yahooSchedule"),
-    getTotoLivePageSummary("jleagueMatches"),
-    getTotoLivePageSummary("jleagueStandings"),
-  ]),
-  getYahooTotoRounds(),
-  getLatestYahooTotoRound(),
+    Promise.all([
+      getTotoLivePageSummary("rakutenSchedule"),
+      getTotoLivePageSummary("yahooSchedule"),
+      getTotoLivePageSummary("jleagueMatches"),
+      getTotoLivePageSummary("jleagueStandings"),
+    ]),
+    getYahooTotoRounds(),
+    getLatestYahooTotoRound(),
   ]);
 
   return (
