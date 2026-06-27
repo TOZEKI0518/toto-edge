@@ -1,0 +1,2 @@
+round_no,match_no,kickoff,league,venue,home_team,away_team,weather,home_rank,away_rank,home_points,away_points,home_last5,away_last5,home_goals_for,home_goals_against,away_goals_for,away_goals_against,home_win_rate,away_win_rate,home_rest_days,away_rest_days,home_injury_level,away_injury_level,vote_home,vote_draw,vote_away
+第0002回,1,2026-07-11T14:00:00+09:00,J1,県立カシマ,鹿島,横浜FM,曇,3,9,34,25,WWDLW,LDWLL,31,18,28,29,0.67,0.28,6,4,1,2,43,25,32
