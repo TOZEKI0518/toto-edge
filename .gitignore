@@ -4,3 +4,4 @@
 .env.local
 .vercel/
 data/raw-html/
+data/snapshots/
