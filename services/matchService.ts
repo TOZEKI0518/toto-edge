@@ -1,8 +1,8 @@
-import { sampleMatches } from "@/data/sampleMatches";
+import { fetchTotoMatches } from "@/services/jleagueService";
 import type { TotoMatch } from "@/types/toto";
 
 export async function getMatches(): Promise<TotoMatch[]> {
-  return sampleMatches;
+  return fetchTotoMatches("sample");
 }
 
 export async function getCurrentTotoRound(): Promise<string> {
