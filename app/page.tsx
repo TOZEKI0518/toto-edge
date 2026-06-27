@@ -1,26 +1,18 @@
 import { AppHeader } from "@/components/AppHeader";
 import { HeroPickCard } from "@/components/HeroPickCard";
 import { MatchCard } from "@/components/MatchCard";
-import { sampleMatches } from "@/data/sampleMatches";
-import { calculatePrediction, getPickLabel } from "@/lib/predictionEngine";
+import { getCurrentTotoRound, getMatches } from "@/services/matchService";
+import {
+  buildDashboardMatch,
+  getBestPick,
+} from "@/services/predictionService";
 
-const matches = sampleMatches.map((match) => {
-  const prediction = calculatePrediction(match);
-  const pickKey = prediction.pick.toLowerCase() as "home" | "draw" | "away";
+export default async function Home() {
+  const rawMatches = await getMatches();
+  const totoRound = await getCurrentTotoRound();
 
-  return {
-    id: match.matchNo,
-    home: match.homeTeam.shortName,
-    away: match.awayTeam.shortName,
-    prediction: getPickLabel(prediction.pick),
-    probability: prediction.probabilities[pickKey],
-    edge: prediction.expectedValues?.[pickKey] ?? 0,
-    confidence: prediction.confidence,
-  };
-});
-
-export default function Home() {
-  const bestPick = [...matches].sort((a, b) => b.edge - a.edge)[0];
+  const matches = rawMatches.map(buildDashboardMatch);
+  const bestPick = getBestPick(matches);
 
   return (
     <main className="min-h-screen bg-[#05060A] text-white">
@@ -38,7 +30,7 @@ export default function Home() {
         <section>
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-xl font-bold">Match Predictions</h3>
-            <p className="text-sm text-white/50">第XXXX回 toto</p>
+            <p className="text-sm text-white/50">{totoRound} toto</p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
