@@ -1,65 +1,67 @@
+import * as cheerio from "cheerio";
 import type { TeamStanding } from "@/types/standing";
 
-export function htmlToPlainText(html: string): string {
-  return html
-    .replace(/<script[\s\S]*?<\/script>/gi, "")
-    .replace(/<style[\s\S]*?<\/style>/gi, "")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/\s+/g, " ")
+const normalizeTeamName = (name: string) =>
+  name
+    .replace(/\s+/g, "")
+    .replace(/Ｆ/g, "F")
+    .replace(/Ｃ/g, "C")
+    .replace(/Ｖ/g, "V")
+    .replace(/．/g, ".")
     .trim();
+
+const toNumber = (value: string | undefined) => {
+  if (!value) return 0;
+  const n = Number(value.replace(/[^\d-]/g, ""));
+  return Number.isFinite(n) ? n : 0;
+};
+
+export function parseJleagueStandingsFromHtml(html: string): TeamStanding[] {
+  const $ = cheerio.load(html);
+  const standings: TeamStanding[] = [];
+
+  $("table tbody tr").each((_, row) => {
+    const cells = $(row)
+      .find("th, td")
+      .map((_, cell) => $(cell).text().trim())
+      .get()
+      .filter(Boolean);
+
+    if (cells.length < 4) return;
+
+    const rank = toNumber(cells[0]);
+    const teamName = normalizeTeamName(cells[1]);
+
+    if (!rank || !teamName) return;
+
+    const numericCells = cells.map(toNumber);
+    const points = numericCells.find((n, index) => index > 1 && n > 0) ?? 0;
+    const goalDifference = numericCells.at(-1) ?? 0;
+
+    standings.push({
+      rank,
+      teamName,
+      points,
+      goalDifference,
+    });
+  });
+
+  const unique = new Map<string, TeamStanding>();
+
+  for (const standing of standings) {
+    if (!unique.has(standing.teamName)) {
+      unique.set(standing.teamName, standing);
+    }
+  }
+
+  return [...unique.values()].sort((a, b) => a.rank - b.rank);
+}
+
+export function htmlToPlainText(html: string): string {
+  const $ = cheerio.load(html);
+  return $.text().replace(/\s+/g, " ").trim();
 }
 
 export function parseJleagueStandings(text: string): TeamStanding[] {
-  const normalized = text.replace(/\s+/g, " ");
-  const standings: TeamStanding[] = [];
-
-  const teamNames = [
-    "鹿島アントラーズ",
-    "水戸ホーリーホック",
-    "浦和レッズ",
-    "ジェフユナイテッド千葉",
-    "柏レイソル",
-    "ＦＣ東京",
-    "FC東京",
-    "東京ヴェルディ",
-    "ＦＣ町田ゼルビア",
-    "FC町田ゼルビア",
-    "川崎フロンターレ",
-    "横浜Ｆ・マリノス",
-    "横浜F・マリノス",
-    "清水エスパルス",
-    "名古屋グランパス",
-    "京都サンガF.C.",
-    "京都サンガＦ.Ｃ.",
-    "ガンバ大阪",
-    "セレッソ大阪",
-    "ヴィッセル神戸",
-    "ファジアーノ岡山",
-    "サンフレッチェ広島",
-    "アビスパ福岡",
-    "Ｖ・ファーレン長崎",
-    "V・ファーレン長崎",
-  ];
-
-  for (const teamName of teamNames) {
-    const index = normalized.indexOf(teamName);
-    if (index === -1) continue;
-
-    const before = normalized.slice(Math.max(0, index - 80), index);
-    const after = normalized.slice(index, index + 180);
-
-    const rankMatch = before.match(/(\d{1,2})\s*$/);
-    const numbers = after.match(/-?\d+/g)?.map(Number) ?? [];
-
-    standings.push({
-      rank: rankMatch ? Number(rankMatch[1]) : standings.length + 1,
-      teamName,
-      points: numbers[0] ?? 0,
-      goalDifference: numbers.at(-1) ?? 0,
-    });
-  }
-
-  return standings;
+  return [];
 }
