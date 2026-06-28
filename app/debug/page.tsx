@@ -3,9 +3,10 @@ import {
   getLatestYahooTotoRound,
   getYahooTotoRounds,
 } from "@/services/yahooTotoService";
+import { getJleagueStandings } from "@/services/jleagueStandingService";
 
 export default async function DebugPage() {
-  const [sources, rounds, latestRound] = await Promise.all([
+  const [sources, rounds, latestRound, standings] = await Promise.all([
     Promise.all([
       getTotoLivePageSummary("rakutenSchedule"),
       getTotoLivePageSummary("yahooSchedule"),
@@ -14,6 +15,7 @@ export default async function DebugPage() {
     ]),
     getYahooTotoRounds(),
     getLatestYahooTotoRound(),
+    getJleagueStandings(),
   ]);
 
   return (
@@ -124,6 +126,40 @@ export default async function DebugPage() {
                       >
                         {round.status}
                       </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section className="mt-10">
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-sm text-cyan-300">J.LEAGUE</p>
+              <h2 className="text-xl font-bold">Parsed Standings</h2>
+            </div>
+            <p className="text-sm text-white/50">{standings.length} teams</p>
+          </div>
+
+          <div className="mt-4 overflow-hidden rounded-3xl border border-white/10">
+            <table className="w-full border-collapse text-left text-sm">
+              <thead className="bg-white/[0.06] text-white/60">
+                <tr>
+                  <th className="px-4 py-3">Rank</th>
+                  <th className="px-4 py-3">Team</th>
+                  <th className="px-4 py-3">Points</th>
+                  <th className="px-4 py-3">Goal Diff</th>
+                </tr>
+              </thead>
+              <tbody>
+                {standings.map((team) => (
+                  <tr key={team.teamName} className="border-t border-white/10">
+                    <td className="px-4 py-3 font-medium">{team.rank}</td>
+                    <td className="px-4 py-3 text-white/80">{team.teamName}</td>
+                    <td className="px-4 py-3 text-white/70">{team.points}</td>
+                    <td className="px-4 py-3 text-white/70">
+                      {team.goalDifference}
                     </td>
                   </tr>
                 ))}
