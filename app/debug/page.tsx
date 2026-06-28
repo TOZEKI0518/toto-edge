@@ -4,6 +4,8 @@ import {
   getYahooTotoRounds,
 } from "@/services/yahooTotoService";
 import { getJleagueStandings } from "@/services/jleagueStandingService";
+import { sampleFixtures } from "@/data/sampleFixtures";
+import { buildPredictionInputs } from "@/services/predictionInputService";
 
 export default async function DebugPage() {
   const [sources, rounds, latestRound, standings] = await Promise.all([
@@ -18,6 +20,7 @@ export default async function DebugPage() {
     getJleagueStandings(),
   ]);
 
+  const predictionInputs = buildPredictionInputs(sampleFixtures, standings);
   return (
     <main className="min-h-screen bg-[#05060A] p-8 text-white">
       <div className="mx-auto max-w-5xl">
@@ -165,6 +168,43 @@ export default async function DebugPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </section>
+        <section className="mt-10">
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-sm text-cyan-300">Prediction</p>
+              <h2 className="text-xl font-bold">Prediction Inputs</h2>
+            </div>
+            <p className="text-sm text-white/50">
+              {predictionInputs.length} matches
+            </p>
+          </div>
+
+          <div className="mt-4 grid gap-4">
+            {predictionInputs.map((input) => (
+              <article
+                key={input.fixture.matchNo}
+                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5"
+              >
+                <p className="text-sm text-white/50">
+                  Match {input.fixture.matchNo}
+                </p>
+                <h3 className="mt-1 text-xl font-bold">
+                  {input.fixture.homeTeam} vs {input.fixture.awayTeam}
+                </h3>
+                <p className="mt-3 text-sm text-white/70">
+                  Home: {input.homeStanding?.rank ?? "-"}位 / 勝点{" "}
+                  {input.homeStanding?.points ?? "-"} / 得失点{" "}
+                  {input.homeStanding?.goalDifference ?? "-"}
+                </p>
+                <p className="mt-1 text-sm text-white/70">
+                  Away: {input.awayStanding?.rank ?? "-"}位 / 勝点{" "}
+                  {input.awayStanding?.points ?? "-"} / 得失点{" "}
+                  {input.awayStanding?.goalDifference ?? "-"}
+                </p>
+              </article>
+            ))}
           </div>
         </section>
       </div>
