@@ -8,7 +8,7 @@ const toNumber = (value: string | undefined) => {
   return Number.isFinite(n) ? n : 0;
 };
 
-const extractTeamName = ($: cheerio.CheerioAPI, cell: cheerio.Element) => {
+const extractTeamName = ($: cheerio.CheerioAPI, cell: unknown) => {
   const anchor = $(cell).find("a").first();
   const spanText = anchor.find("span").first().text().trim();
 
