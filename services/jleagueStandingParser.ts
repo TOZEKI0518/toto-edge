@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import type { AnyNode } from "domhandler";
 import { normalizeTeamName } from "@/lib/teamNameNormalizer";
 import type { TeamStanding } from "@/types/standing";
 
@@ -8,7 +9,7 @@ const toNumber = (value: string | undefined) => {
   return Number.isFinite(n) ? n : 0;
 };
 
-const extractTeamName = ($: cheerio.CheerioAPI, cell: unknown) => {
+const extractTeamName = ($: cheerio.CheerioAPI, cell: AnyNode) => {
   const anchor = $(cell).find("a").first();
   const spanText = anchor.find("span").first().text().trim();
 
