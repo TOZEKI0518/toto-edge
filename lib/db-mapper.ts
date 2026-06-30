@@ -32,8 +32,16 @@ type DbMatch = {
 };
 
 function weatherLabel(value: string | null): TotoMatch["weather"] {
-  if (value === "晴" || value === "曇" || value === "雨" || value === "強雨") return value;
-  return "曇";
+  const condition =
+    value === "晴" || value === "曇" || value === "雨" || value === "強雨"
+      ? value
+      : "曇";
+
+  return {
+    condition,
+    temperature: 25,
+    windSpeed: 3,
+  };
 }
 
 export function mapDbMatch(row: DbMatch): TotoMatch {
