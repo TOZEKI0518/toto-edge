@@ -2,7 +2,6 @@ import { AppHeader } from "@/components/AppHeader";
 import { FixturePredictionCard } from "@/components/FixturePredictionCard";
 import { getCurrentRoundData } from "@/services/totoRoundService";
 import { getJleagueStandings } from "@/services/jleagueStandingService";
-import { getCurrentTotoRound } from "@/services/matchService";
 import {
   getOutcomeLabel,
   predictFixtures,
@@ -18,20 +17,20 @@ export default async function Home() {
   const predictionInputs = buildPredictionInputs(roundData.fixtures, standings);
   const predictions = predictFixtures(predictionInputs);
   if (predictions.length === 0) {
-  return (
-    <main className="min-h-screen bg-[#05060A] text-white">
-      <div className="mx-auto max-w-6xl px-5 py-8">
-        <AppHeader />
-        <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-          <p className="text-sm text-cyan-300">Sprint6</p>
-          <h2 className="mt-2 text-2xl font-bold">Fixtures not loaded yet</h2>
-          <p className="mt-3 text-white/60">
-            次のStepでYahoo/toto公式から対象試合を取得して表示します。
-          </p>
-        </section>
-      </div>
-    </main>
-  );
+    return (
+      <main className="min-h-screen bg-[#05060A] text-white">
+        <div className="mx-auto max-w-6xl px-5 py-8">
+          <AppHeader />
+          <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+            <p className="text-sm text-cyan-300">Sprint6</p>
+            <h2 className="mt-2 text-2xl font-bold">Fixtures not loaded yet</h2>
+            <p className="mt-3 text-white/60">
+              次のStepでYahoo/toto公式から対象試合を取得して表示します。
+            </p>
+          </section>
+        </div>
+      </main>
+    );
   }
   const bestPrediction = [...predictions].sort(
     (a, b) => b.probability - a.probability
