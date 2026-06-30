@@ -44,7 +44,7 @@ export function FixturePredictionCard({
           <div className="text-right">
             <p className="text-4xl font-black">{prediction.probability}%</p>
             <p className="text-xs text-white/40">
-              Score {prediction.totalScore}
+              AI Score {prediction.totalScore}
             </p>
           </div>
         </div>

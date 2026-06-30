@@ -43,9 +43,15 @@ export function predictFixture(input: PredictionInput): FixturePrediction {
       totalScore: 0,
       factors: [
         {
-          label: "データ不足",
+          label: "暫定予測",
           score: 0,
-          description: "順位表データと照合できませんでした。",
+          description:
+            "Jリーグ順位表と照合できないため、暫定的に引き分け寄りとして表示しています。",
+        },
+        {
+          label: "データ状態",
+          score: 0,
+          description: "対象試合またはチーム名が順位データと一致していません。",
         },
       ],
     };
