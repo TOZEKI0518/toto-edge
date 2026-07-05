@@ -22,36 +22,33 @@ export function parseJleagueStandingsFromHtml(html: string): TeamStanding[] {
   const $ = cheerio.load(html);
   const standings: TeamStanding[] = [];
 
-  $("table").each((tableIndex, table) => {
-    if (tableIndex === 0) return;
-
+  $("table").each((_, table) => {
     $(table)
       .find("tbody tr")
       .each((_, row) => {
         const cells = $(row).find("th, td").toArray();
 
-        if (cells.length < 12) return;
+        if (cells.length < 10) return;
 
-        const rank = toNumber($(cells[1]).text());
-        const teamName = extractTeamName($, cells[2]);
-        const points = toNumber($(cells[3]).text());
-        const goalDifference = toNumber($(cells[11]).text());
+        const hasMoveIcon = $(cells[0]).find("i").length > 0;
+        const offset = hasMoveIcon ? 1 : 0;
+
+        const rank = toNumber($(cells[offset]).text());
+        const teamName = extractTeamName($, cells[offset + 1]);
 
         if (!rank || !teamName) return;
 
         standings.push({
           rank,
           teamName,
-          points,
-          goalDifference,
-          matches: toNumber($(cells[4]).text()),
-          wins: toNumber($(cells[5]).text()),
-          draws:
-            toNumber($(cells[6]).text()) + toNumber($(cells[7]).text()),
-          losses:
-            toNumber($(cells[8]).text()) + toNumber($(cells[9]).text()),
-          goalsFor: toNumber($(cells[9]).text()),
-          goalsAgainst: toNumber($(cells[10]).text()),
+          points: toNumber($(cells[offset + 2]).text()),
+          matches: toNumber($(cells[offset + 3]).text()),
+          wins: toNumber($(cells[offset + 4]).text()),
+          draws: toNumber($(cells[offset + 5]).text()),
+          losses: toNumber($(cells[offset + 6]).text()),
+          goalsFor: toNumber($(cells[offset + 7]).text()),
+          goalsAgainst: toNumber($(cells[offset + 8]).text()),
+          goalDifference: toNumber($(cells[offset + 9]).text()),
         });
       });
   });

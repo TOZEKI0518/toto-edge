@@ -17,12 +17,30 @@ export async function runBacktestForRound(
     getJleagueStandings(),
     fetchHtml(getRoundDetailUrl(roundNumber)),
   ]);
-
+ 
   const fixtures = parseTotoFixturesFromHtml(html);
   const inputs = buildPredictionInputs(fixtures, standings);
 
   const validInputs = inputs.filter(
     (input) => input.homeStanding && input.awayStanding
+  );
+
+  const unmatchedTeams = Array.from(
+    new Set(
+      inputs.flatMap((input) => {
+        const teams: string[] = [];
+
+        if (!input.homeStanding) {
+          teams.push(input.fixture.homeTeam);
+        }
+
+        if (!input.awayStanding) {
+          teams.push(input.fixture.awayTeam);
+        }
+
+        return teams;
+      })
+    )
   );
 
   const matches = validInputs
@@ -60,6 +78,7 @@ export async function runBacktestForRound(
     hitRate:
       totalMatches === 0 ? 0 : Math.round((hitCount / totalMatches) * 1000) / 10,
     matches,
+    unmatchedTeams,
   };
 }
 export async function runBacktestSummary(roundNumbers: string[]) {

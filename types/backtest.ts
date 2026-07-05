@@ -21,4 +21,5 @@ export type BacktestRoundResult = {
   hitCount: number;
   hitRate: number;
   matches: BacktestMatchResult[];
+  unmatchedTeams?: string[];
 };

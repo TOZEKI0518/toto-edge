@@ -65,6 +65,22 @@ export default async function BacktestPage({ searchParams }: BacktestPageProps) 
           </section>
         )}
 
+        {result.unmatchedTeams && result.unmatchedTeams.length > 0 && (
+          <section className="mt-6 rounded-3xl border border-yellow-400/20 bg-yellow-400/10 p-5">
+            <p className="text-sm text-yellow-100">未照合チーム</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {result.unmatchedTeams.map((team) => (
+                <span
+                  key={team}
+                  className="rounded-full bg-black/30 px-3 py-1 text-sm text-yellow-100"
+                >
+                  {team}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="mt-8 grid gap-4">
           {result.matches.map((match) => (
             <article

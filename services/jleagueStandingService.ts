@@ -1,9 +1,22 @@
 import { fetchHtml } from "@/services/totoFetcher";
-import { getTotoSourceUrl } from "@/services/totoSourceService";
 import { parseJleagueStandingsFromHtml } from "@/services/jleagueStandingParser";
 import type { TeamStanding } from "@/types/standing";
 
+const standingUrls = [
+  "https://www.jleague.jp/standings/j1/",
+  "https://www.jleague.jp/standings/j2/",
+  "https://www.jleague.jp/standings/j3/",
+];
+
 export async function getJleagueStandings(): Promise<TeamStanding[]> {
-  const html = await fetchHtml(getTotoSourceUrl("jleagueStandings"));
-  return parseJleagueStandingsFromHtml(html);
+  const results = await Promise.all(
+    standingUrls.map(async (url) => {
+      const html = await fetchHtml(url);
+      const standings = parseJleagueStandingsFromHtml(html);
+
+      return standings;
+    })
+  );
+
+  return results.flat();
 }
