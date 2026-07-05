@@ -1,3 +1,5 @@
+import type { TeamStanding } from "@/types/standing";
+
 export type TotoFixture = {
   matchNo: number;
   homeTeam: string;
@@ -8,16 +10,6 @@ export type TotoFixture = {
 
 export type PredictionInput = {
   fixture: TotoFixture;
-  homeStanding?: {
-    rank: number;
-    teamName: string;
-    points: number;
-    goalDifference: number;
-  };
-  awayStanding?: {
-    rank: number;
-    teamName: string;
-    points: number;
-    goalDifference: number;
-  };
+  homeStanding?: TeamStanding;
+  awayStanding?: TeamStanding;
 };
