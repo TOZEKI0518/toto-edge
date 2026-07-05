@@ -91,6 +91,51 @@ export function predictFixture(input: PredictionInput): FixturePrediction {
         : `${away.teamName}の得失点差が上回っています。`,
   });
 
+  const winRateScore = clamp(
+    ((home.wins ?? 0) - (away.wins ?? 0)) * 1.2,
+    -10,
+    10
+  );
+
+  factors.push({
+    label: "勝利数差",
+    score: Math.round(winRateScore),
+    description:
+      winRateScore >= 0
+        ? `${home.teamName}の勝利数を評価しています。`
+        : `${away.teamName}の勝利数を評価しています。`,
+  });
+
+  const attackScore = clamp(
+    ((home.goalsFor ?? 0) - (away.goalsFor ?? 0)) * 0.5,
+    -8,
+    8
+  );
+
+  factors.push({
+    label: "攻撃力",
+    score: Math.round(attackScore),
+    description:
+      attackScore >= 0
+        ? `${home.teamName}の得点力を評価しています。`
+        : `${away.teamName}の得点力を評価しています。`,
+  });
+
+  const defenseScore = clamp(
+    ((away.goalsAgainst ?? 0) - (home.goalsAgainst ?? 0)) * 0.5,
+    -8,
+    8
+  );
+
+  factors.push({
+    label: "守備力",
+    score: Math.round(defenseScore),
+    description:
+      defenseScore >= 0
+        ? `${home.teamName}の失点の少なさを評価しています。`
+        : `${away.teamName}の失点の少なさを評価しています。`,
+  });
+
   const homeAdvantageScore = 5;
   factors.push({
     label: "ホーム補正",
@@ -99,7 +144,13 @@ export function predictFixture(input: PredictionInput): FixturePrediction {
   });
 
   const totalScore = Math.round(
-    rankScore + pointsScore + goalDiffScore + homeAdvantageScore
+    rankScore +
+  pointsScore +
+  goalDiffScore +
+  winRateScore +
+  attackScore +
+  defenseScore +
+  homeAdvantageScore
   );
 
   const outcome = getOutcome(totalScore);
