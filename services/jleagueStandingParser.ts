@@ -44,6 +44,14 @@ export function parseJleagueStandingsFromHtml(html: string): TeamStanding[] {
           teamName,
           points,
           goalDifference,
+          matches: toNumber($(cells[4]).text()),
+          wins: toNumber($(cells[5]).text()),
+          draws:
+            toNumber($(cells[6]).text()) + toNumber($(cells[7]).text()),
+          losses:
+            toNumber($(cells[8]).text()) + toNumber($(cells[9]).text()),
+          goalsFor: toNumber($(cells[9]).text()),
+          goalsAgainst: toNumber($(cells[10]).text()),
         });
       });
   });
