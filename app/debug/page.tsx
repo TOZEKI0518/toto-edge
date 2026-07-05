@@ -4,12 +4,6 @@ import {
   getYahooTotoRounds,
 } from "@/services/yahooTotoService";
 import { getJleagueStandings } from "@/services/jleagueStandingService";
-import { sampleFixtures } from "@/data/sampleFixtures";
-import { buildPredictionInputs } from "@/services/predictionInputService";
-import {
-  getOutcomeLabel,
-  predictFixtures,
-} from "@/services/fixturePredictionService";
 
 
 export default async function DebugPage() {
@@ -25,8 +19,6 @@ export default async function DebugPage() {
     getJleagueStandings(),
   ]);
 
-  const predictionInputs = buildPredictionInputs(sampleFixtures, standings);
-  const fixturePredictions = predictFixtures(predictionInputs);
   return (
     <main className="min-h-screen bg-[#05060A] p-8 text-white">
       <div className="mx-auto max-w-5xl">
@@ -174,116 +166,6 @@ export default async function DebugPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </section>
-        <section className="mt-10">
-          <div className="flex items-end justify-between">
-            <div>
-              <p className="text-sm text-cyan-300">Prediction</p>
-              <h2 className="text-xl font-bold">Prediction Inputs</h2>
-            </div>
-            <p className="text-sm text-white/50">
-              {predictionInputs.length} matches
-            </p>
-          </div>
-
-          <div className="mt-4 grid gap-4">
-            {predictionInputs.map((input) => (
-              <article
-                key={input.fixture.matchNo}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5"
-              >
-                <p className="text-sm text-white/50">
-                  Match {input.fixture.matchNo}
-                </p>
-                <h3 className="mt-1 text-xl font-bold">
-                  {input.fixture.homeTeam} vs {input.fixture.awayTeam}
-                </h3>
-                <p className="mt-3 text-sm text-white/70">
-                  Home: {input.homeStanding?.rank ?? "-"}位 / 勝点{" "}
-                  {input.homeStanding?.points ?? "-"} / 得失点{" "}
-                  {input.homeStanding?.goalDifference ?? "-"}
-                </p>
-                <p className="mt-1 text-sm text-white/70">
-                  Away: {input.awayStanding?.rank ?? "-"}位 / 勝点{" "}
-                  {input.awayStanding?.points ?? "-"} / 得失点{" "}
-                  {input.awayStanding?.goalDifference ?? "-"}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-        <section className="mt-10">
-          <div className="flex items-end justify-between">
-            <div>
-              <p className="text-sm text-cyan-300">AI Engine V1</p>
-              <h2 className="text-xl font-bold">Fixture Predictions</h2>
-            </div>
-            <p className="text-sm text-white/50">
-              {fixturePredictions.length} predictions
-            </p>
-          </div>
-
-          <div className="mt-4 grid gap-4">
-            {fixturePredictions.map((prediction) => (
-              <article
-                key={prediction.matchNo}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm text-white/50">
-                      Match {prediction.matchNo}
-                    </p>
-                    <h3 className="mt-1 text-xl font-bold">
-                      {prediction.homeTeam} vs {prediction.awayTeam}
-                    </h3>
-                    <p className="mt-2 text-cyan-300">
-                      {getOutcomeLabel(prediction.outcome)}
-                    </p>
-                  </div>
-
-                  <div className="text-right">
-                    <p className="text-4xl font-black">{prediction.probability}%</p>
-                    <p className="mt-1 text-sm text-white/50">
-                      Confidence {prediction.confidence}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-5 rounded-2xl bg-black/30 p-4">
-                  <p className="text-sm text-white/50">
-                    Total Score: {prediction.totalScore}
-                  </p>
-
-                  <div className="mt-3 space-y-2">
-                    {prediction.factors.map((factor) => (
-                      <div
-                        key={factor.label}
-                        className="flex items-start justify-between gap-4 text-sm"
-                      >
-                        <div>
-                          <p className="font-medium text-white/80">
-                            {factor.label}
-                          </p>
-                          <p className="text-white/45">{factor.description}</p>
-                        </div>
-                        <p
-                          className={
-                            factor.score >= 0
-                              ? "font-bold text-cyan-300"
-                              : "font-bold text-red-300"
-                          }
-                        >
-                          {factor.score >= 0 ? "+" : ""}
-                          {factor.score}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
           </div>
         </section>
       </div>
