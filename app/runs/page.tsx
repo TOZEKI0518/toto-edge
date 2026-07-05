@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getPredictionRuns } from "@/services/predictionRunService";
 
 export default async function RunsPage() {
@@ -24,7 +25,11 @@ export default async function RunsPage() {
             <tbody>
               {runs.map((run) => (
                 <tr key={run.id} className="border-t border-white/10">
-                  <td className="px-4 py-3">{run.id}</td>
+                  <td className="px-4 py-3">
+                    <Link href={`/runs/${run.id}`} className="text-cyan-300 underline">
+                      #{run.id}
+                    </Link>
+                  </td>
                   <td className="px-4 py-3">第{run.round_no}回</td>
                   <td className="px-4 py-3">
                     {run.data_snapshot_round
