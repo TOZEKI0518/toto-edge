@@ -1,5 +1,5 @@
 import { buildPredictionInputs } from "@/services/predictionInputService";
-import { predictFixtures } from "@/services/fixturePredictionService";
+import { predictFixture } from "@/services/fixturePredictionService";
 import { getJleagueStandings } from "@/services/jleagueStandingService";
 import { fetchHtml } from "@/services/totoFetcher";
 import { parseTotoFixturesFromHtml } from "@/services/totoFixtureParser";
@@ -20,10 +20,14 @@ export async function runBacktestForRound(
 
   const fixtures = parseTotoFixturesFromHtml(html);
   const inputs = buildPredictionInputs(fixtures, standings);
-  const predictions = predictFixtures(inputs);
 
-  const matches = predictions
-    .map((prediction) => {
+  const validInputs = inputs.filter(
+    (input) => input.homeStanding && input.awayStanding
+  );
+
+  const matches = validInputs
+    .map((input) => {
+      const prediction = predictFixture(input);
       const fixture = fixtures.find(
         (item) => item.matchNo === prediction.matchNo
       );
