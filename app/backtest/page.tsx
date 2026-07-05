@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getOutcomeLabel } from "@/services/fixturePredictionService";
 import { runBacktestForRound } from "@/services/backtestService";
+import { AppNav } from "@/components/AppNav";
 
 type BacktestPageProps = {
   searchParams?: Promise<{
@@ -22,6 +23,8 @@ export default async function BacktestPage({ searchParams }: BacktestPageProps) 
         <h1 className="mt-2 text-3xl font-bold">
           {result.round} Backtest Result
         </h1>
+
+        <AppNav />
 
         <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
           <p className="text-sm text-white/50">Round Select</p>

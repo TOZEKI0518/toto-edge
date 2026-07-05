@@ -7,6 +7,7 @@ import {
   predictFixtures,
 } from "@/services/fixturePredictionService";
 import { buildPredictionInputs } from "@/services/predictionInputService";
+import { AppNav } from "@/components/AppNav";
 
 export default async function Home() {
   const [standings, roundData] = await Promise.all([
@@ -41,6 +42,8 @@ export default async function Home() {
       <div className="mx-auto max-w-6xl px-5 py-8">
         <AppHeader />
 
+        <AppNav />
+        
         <section className="mb-8 rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-purple-500/20 p-6 shadow-2xl">
           <p className="mb-2 text-sm text-white/60">Today&apos;s Best Pick</p>
 

@@ -1,3 +1,4 @@
+import { AppNav } from "@/components/AppNav";
 import { getTotoLivePageSummary } from "@/services/totoLiveService";
 import {
   getLatestYahooTotoRound,
@@ -25,6 +26,8 @@ export default async function DebugPage() {
         <p className="text-sm text-cyan-300">Debug</p>
         <h1 className="mt-2 text-3xl font-bold">TOTO Data Debug</h1>
 
+        <AppNav />
+        
         {latestRound && (
           <section className="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-6">
             <p className="text-sm text-cyan-300">Latest Round</p>

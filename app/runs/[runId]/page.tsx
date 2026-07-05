@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPredictionHistoryByRunId } from "@/services/predictionRunService";
+import { AppNav } from "@/components/AppNav";
 
 type RunDetailPageProps = {
   params: Promise<{
@@ -27,7 +28,9 @@ export default async function RunDetailPage({ params }: RunDetailPageProps) {
 
         <h1 className="mt-3 text-3xl font-bold">Run #{runId}</h1>
 
-        <section className="mt-6 grid gap-4">
+        <AppNav />
+
+        <section className="mt-8 grid gap-4">
           {rows.map((row) => (
             <article
               key={row.id}

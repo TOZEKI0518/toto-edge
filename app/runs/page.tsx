@@ -1,3 +1,4 @@
+import { AppNav } from "@/components/AppNav";
 import Link from "next/link";
 import { getPredictionRuns } from "@/services/predictionRunService";
 
@@ -10,6 +11,8 @@ export default async function RunsPage() {
         <p className="text-sm text-cyan-300">AI Lab</p>
         <h1 className="mt-2 text-3xl font-bold">Prediction Runs</h1>
 
+        <AppNav />
+        
         <section className="mt-6 overflow-hidden rounded-3xl border border-white/10">
           <table className="w-full border-collapse text-left text-sm">
             <thead className="bg-white/[0.06] text-white/60">
