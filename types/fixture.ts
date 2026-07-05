@@ -6,6 +6,7 @@ export type TotoFixture = {
   awayTeam: string;
   kickoffAt?: string;
   venue?: string;
+  totoResult?: string;
 };
 
 export type PredictionInput = {

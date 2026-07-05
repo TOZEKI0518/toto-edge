@@ -31,6 +31,7 @@ export function parseTotoFixturesFromHtml(html: string): TotoFixture[] {
       awayTeam,
       kickoffAt: cells[0],
       venue: cells[1],
+      totoResult: cells[6],
     });
   });
 
