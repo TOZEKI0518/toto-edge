@@ -78,3 +78,21 @@ export async function runBacktestSummary(roundNumbers: string[]) {
       totalMatches === 0 ? 0 : Math.round((totalHits / totalMatches) * 1000) / 10,
   };
 }
+export async function inspectBacktestRounds(roundNumbers: string[]) {
+  const results = await Promise.all(
+    roundNumbers.map(async (roundNumber) => {
+      const result = await runBacktestForRound(roundNumber);
+
+      return {
+        roundNumber,
+        round: result.round,
+        totalMatches: result.totalMatches,
+        hitCount: result.hitCount,
+        hitRate: result.hitRate,
+        isJleagueCandidate: result.totalMatches > 0,
+      };
+    })
+  );
+
+  return results;
+}
