@@ -1,3 +1,4 @@
+import { normalizeTeamName } from "@/lib/teamNameNormalizer";
 import type { PredictionInput } from "@/types/fixture";
 import type {
   FixturePrediction,
@@ -5,32 +6,163 @@ import type {
   PredictionFactor,
 } from "@/types/prediction";
 
-const clamp = (value: number, min: number, max: number) => {
-  return Math.min(Math.max(value, min), max);
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
+
+const round1 = (value: number) => Math.round(value * 10) / 10;
+
+function weighted(score: number, weight: number) {
+  return score * weight;
+}
+
+function formatSigned(value: number) {
+  const rounded = round1(value);
+  return rounded > 0 ? `+${rounded}` : String(rounded);
+}
+
+// v2.0 Stability Engine
+// これまでのExcel比較では、特徴量を増やすほど精度が落ちる傾向がありました。
+// そのため、予測の中核を「Home/Away ELO + 勝点/順位」に戻し、
+// Head-to-Headは診断表示のみ、フォームは十分な試合数がある時だけ弱く効かせます。
+const WEIGHTS = {
+  sideElo: 1.1,
+  totalElo: 0.55,
+  points: 0.7,
+  rank: 0.55,
+  goalDiff: 0.45,
+  winRate: 0.45,
+  recentForm: 0.28,
+  sideForm: 0.28,
+  attackDefense: 0.25,
+  homeAdvantage: 0.75,
 };
 
-const getOutcome = (score: number): MatchOutcome => {
-  if (score >= 12) return "HOME";
-  if (score <= -12) return "AWAY";
-  return "DRAW";
-};
+function getResultRate(wins = 0, draws = 0, matches = 0) {
+  if (!matches) return 0.5;
+  return (wins + draws * 0.35) / matches;
+}
 
-const getProbability = (score: number) => {
-  return Math.round(clamp(50 + Math.abs(score) * 1.2, 38, 78));
-};
+function getDrawRate(draws = 0, matches = 0) {
+  if (!matches) return 0;
+  return draws / matches;
+}
+
+function getOutcome(params: {
+  score: number;
+  drawSignal: number;
+  strongSideSignal: number;
+}): MatchOutcome {
+  const absScore = Math.abs(params.score);
+
+  // v2.1 Uncertainty + Draw Calibration
+  // 1630回の詳細を見ると、総合スコア差が小さいのにS/A判定で
+  // Home/Awayへ振り切って外すケースが多かったため、
+  // 「僅差ゾーン」は勝敗より引き分けを優先します。
+  if (absScore <= 4) return "DRAW";
+  if (absScore <= 7 && params.drawSignal >= 2.4 && params.strongSideSignal < 3.2) return "DRAW";
+  if (absScore <= 10 && params.drawSignal >= 4.4 && params.strongSideSignal < 2.2) return "DRAW";
+
+  return params.score >= 0 ? "HOME" : "AWAY";
+}
+
+function getProbability(score: number, drawSignal: number, outcome: MatchOutcome) {
+  const certainty = Math.abs(score);
+
+  if (outcome === "DRAW") {
+    // Drawは元々難しいため、過信しない。
+    return Math.round(clamp(43 + drawSignal * 2.4 - certainty * 0.35, 42, 57));
+  }
+
+  // 僅差なのに70%以上/S判定になる問題を修正。
+  // 確信度は「スコア差」が十分に開いた時だけ上げます。
+  return Math.round(clamp(48 + certainty * 0.95 - drawSignal * 0.75, 45, 74));
+}
 
 const getConfidence = (probability: number): FixturePrediction["confidence"] => {
-  if (probability >= 70) return "S";
-  if (probability >= 62) return "A";
-  if (probability >= 55) return "B";
+  if (probability >= 72) return "S";
+  if (probability >= 65) return "A";
+  if (probability >= 56) return "B";
   return "C";
 };
+
+function getHeadToHeadDiagnostic(input: PredictionInput): PredictionFactor {
+  const home = input.homeStanding;
+  const away = input.awayStanding;
+
+  if (!home || !away) {
+    return {
+      label: "対戦相性",
+      score: 0,
+      description: "対戦相性データが不足しています。",
+    };
+  }
+
+  const awayKey = normalizeTeamName(away.teamName);
+  const record = home.headToHead?.[awayKey];
+
+  if (!record || record.matches === 0) {
+    return {
+      label: "対戦相性",
+      score: 0,
+      description: `${home.teamName}と${away.teamName}の過去対戦データは限定的です。今回はスコアに反映していません。`,
+    };
+  }
+
+  const rate = getResultRate(record.wins, record.draws, record.matches);
+  const diagnosticScore = clamp((rate - 0.5) * 10 + record.weightedScore * 3, -7, 7);
+
+  return {
+    label: "対戦相性",
+    score: Math.round(diagnosticScore),
+    description:
+      `${home.teamName}視点では${record.wins}勝${record.draws}分${record.losses}敗です。` +
+      " Excel比較で悪化要因になったため、今版では診断表示のみです。",
+  };
+}
+
+function getDrawSignal(params: {
+  eloDiff: number;
+  sideEloDiff: number;
+  pointsDiff: number;
+  rankDiff: number;
+  formDiff: number;
+  sideFormDiff: number;
+  homeDrawRate: number;
+  awayDrawRate: number;
+}) {
+  let signal = 0;
+
+  if (Math.abs(params.sideEloDiff) < 28) signal += 1.8;
+  if (Math.abs(params.eloDiff) < 25) signal += 1.4;
+  if (Math.abs(params.pointsDiff) <= 2) signal += 1.2;
+  if (Math.abs(params.rankDiff) <= 2) signal += 0.9;
+  if (Math.abs(params.formDiff) <= 2) signal += 0.7;
+  if (Math.abs(params.sideFormDiff) <= 2) signal += 0.7;
+
+  const averageDrawRate = (params.homeDrawRate + params.awayDrawRate) / 2;
+  if (averageDrawRate >= 0.34) signal += 1.1;
+  else if (averageDrawRate >= 0.27) signal += 0.6;
+
+  return clamp(signal, 0, 6.5);
+}
+
+function getStrongSideSignal(params: {
+  sideEloDiff: number;
+  pointsDiff: number;
+  rankDiff: number;
+  winRateDiff: number;
+}) {
+  let signal = 0;
+  if (Math.abs(params.sideEloDiff) >= 65) signal += 2.2;
+  if (Math.abs(params.pointsDiff) >= 6) signal += 1.4;
+  if (Math.abs(params.rankDiff) >= 5) signal += 1.1;
+  if (Math.abs(params.winRateDiff) >= 0.18) signal += 1.0;
+  return signal;
+}
 
 export function predictFixture(input: PredictionInput): FixturePrediction {
   const home = input.homeStanding;
   const away = input.awayStanding;
-
-  const factors: PredictionFactor[] = [];
 
   if (!home || !away) {
     return {
@@ -48,26 +180,49 @@ export function predictFixture(input: PredictionInput): FixturePrediction {
           description:
             "Jリーグ順位表と照合できないため、暫定的に引き分け寄りとして表示しています。",
         },
-        {
-          label: "データ状態",
-          score: 0,
-          description: "対象試合またはチーム名が順位データと一致していません。",
-        },
       ],
     };
   }
 
-  const rankScore = clamp((away.rank - home.rank) * 2.5, -20, 20);
+  const factors: PredictionFactor[] = [];
+  const scoreParts: number[] = [];
+
+  const homeMatches = home.matches ?? 0;
+  const awayMatches = away.matches ?? 0;
+  const enoughHomeSample = homeMatches >= 4;
+  const enoughAwaySample = awayMatches >= 4;
+
+  const homeElo = home.eloRating ?? 1500;
+  const awayElo = away.eloRating ?? 1500;
+  const eloDiff = homeElo - awayElo;
+  const totalEloScore = weighted(clamp(eloDiff * 0.075, -14, 14), WEIGHTS.totalElo);
+  scoreParts.push(totalEloScore);
   factors.push({
-    label: "順位差",
-    score: Math.round(rankScore),
+    label: "総合ELO",
+    score: Math.round(totalEloScore),
     description:
-      rankScore >= 0
-        ? `${home.teamName}が順位面で優位です。`
-        : `${away.teamName}が順位面で優位です。`,
+      totalEloScore >= 0
+        ? `${home.teamName}の総合ELOが高めです。調整後 ${formatSigned(totalEloScore)}。`
+        : `${away.teamName}の総合ELOが高めです。調整後 ${formatSigned(totalEloScore)}。`,
   });
 
-  const pointsScore = clamp((home.points - away.points) * 0.8, -18, 18);
+  const homeSideElo = home.homeEloRating ?? homeElo;
+  const awaySideElo = away.awayEloRating ?? awayElo;
+  const sideEloDiff = homeSideElo - awaySideElo;
+  const sideEloScore = weighted(clamp(sideEloDiff * 0.095, -18, 18), WEIGHTS.sideElo);
+  scoreParts.push(sideEloScore);
+  factors.push({
+    label: "Home/Away ELO",
+    score: Math.round(sideEloScore),
+    description:
+      sideEloScore >= 0
+        ? `${home.teamName}のホームELO（${Math.round(homeSideElo)}）を重視しています。`
+        : `${away.teamName}のアウェイELO（${Math.round(awaySideElo)}）を重視しています。`,
+  });
+
+  const pointsDiff = home.points - away.points;
+  const pointsScore = weighted(clamp(pointsDiff * 0.5, -12, 12), WEIGHTS.points);
+  scoreParts.push(pointsScore);
   factors.push({
     label: "勝点差",
     score: Math.round(pointsScore),
@@ -77,84 +232,128 @@ export function predictFixture(input: PredictionInput): FixturePrediction {
         : `${away.teamName}が勝点で上回っています。`,
   });
 
-  const goalDiffScore = clamp(
-    (home.goalDifference - away.goalDifference) * 0.7,
-    -16,
-    16
-  );
+  const rankDiff = away.rank - home.rank;
+  const rankScore = weighted(clamp(rankDiff * 1.25, -12, 12), WEIGHTS.rank);
+  scoreParts.push(rankScore);
+  factors.push({
+    label: "順位差",
+    score: Math.round(rankScore),
+    description:
+      rankScore >= 0
+        ? `${home.teamName}が順位面で優位です。`
+        : `${away.teamName}が順位面で優位です。`,
+  });
+
+  const goalDiffDiff = home.goalDifference - away.goalDifference;
+  const goalDiffScore = weighted(clamp(goalDiffDiff * 0.55, -10, 10), WEIGHTS.goalDiff);
+  scoreParts.push(goalDiffScore);
   factors.push({
     label: "得失点差",
     score: Math.round(goalDiffScore),
     description:
       goalDiffScore >= 0
-        ? `${home.teamName}の得失点差が上回っています。`
-        : `${away.teamName}の得失点差が上回っています。`,
+        ? `${home.teamName}の得失点差を評価しています。`
+        : `${away.teamName}の得失点差を評価しています。`,
   });
 
-  const winRateScore = clamp(
-    ((home.wins ?? 0) - (away.wins ?? 0)) * 1.2,
-    -10,
-    10
-  );
-
+  const homeWinRate = homeMatches > 0 ? (home.wins ?? 0) / homeMatches : 0.33;
+  const awayWinRate = awayMatches > 0 ? (away.wins ?? 0) / awayMatches : 0.33;
+  const winRateDiff = homeWinRate - awayWinRate;
+  const winRateScore = weighted(clamp(winRateDiff * 28, -8, 8), WEIGHTS.winRate);
+  scoreParts.push(winRateScore);
   factors.push({
-    label: "勝利数差",
+    label: "勝率差",
     score: Math.round(winRateScore),
     description:
       winRateScore >= 0
-        ? `${home.teamName}の勝利数を評価しています。`
-        : `${away.teamName}の勝利数を評価しています。`,
+        ? `${home.teamName}の勝率を評価しています。`
+        : `${away.teamName}の勝率を評価しています。`,
   });
 
-  const attackScore = clamp(
-    ((home.goalsFor ?? 0) - (away.goalsFor ?? 0)) * 0.5,
-    -8,
-    8
-  );
-
+  const homeFormPoints = enoughHomeSample ? home.recentFormPoints ?? 0 : 0;
+  const awayFormPoints = enoughAwaySample ? away.recentFormPoints ?? 0 : 0;
+  const formDiff = homeFormPoints - awayFormPoints;
+  const formScore = weighted(clamp(formDiff * 1.2, -10, 10), WEIGHTS.recentForm);
+  scoreParts.push(formScore);
   factors.push({
-    label: "攻撃力",
-    score: Math.round(attackScore),
+    label: "直近5試合フォーム",
+    score: Math.round(formScore),
     description:
-      attackScore >= 0
-        ? `${home.teamName}の得点力を評価しています。`
-        : `${away.teamName}の得点力を評価しています。`,
+      formScore >= 0
+        ? `${home.teamName}の直近成績（${home.recentFormLabel || "-"}）を控えめに評価しています。`
+        : `${away.teamName}の直近成績（${away.recentFormLabel || "-"}）を控えめに評価しています。`,
   });
 
-  const defenseScore = clamp(
-    ((away.goalsAgainst ?? 0) - (home.goalsAgainst ?? 0)) * 0.5,
-    -8,
-    8
-  );
-
+  const homeSideForm = enoughHomeSample ? home.homeRecentFormPoints ?? 0 : 0;
+  const awaySideForm = enoughAwaySample ? away.awayRecentFormPoints ?? 0 : 0;
+  const sideFormDiff = homeSideForm - awaySideForm;
+  const sideFormScore = weighted(clamp(sideFormDiff * 1.15, -9, 9), WEIGHTS.sideForm);
+  scoreParts.push(sideFormScore);
   factors.push({
-    label: "守備力",
-    score: Math.round(defenseScore),
+    label: "Home/Awayフォーム",
+    score: Math.round(sideFormScore),
     description:
-      defenseScore >= 0
-        ? `${home.teamName}の失点の少なさを評価しています。`
-        : `${away.teamName}の失点の少なさを評価しています。`,
+      sideFormScore >= 0
+        ? `${home.teamName}のホーム直近成績（${home.homeRecentFormLabel || "-"}）を控えめに評価しています。`
+        : `${away.teamName}のアウェイ直近成績（${away.awayRecentFormLabel || "-"}）を控えめに評価しています。`,
   });
 
-  const homeAdvantageScore = 5;
+  const attackDefenseRaw =
+    ((home.goalsFor ?? 0) - (away.goalsFor ?? 0)) * 0.25 +
+    ((away.goalsAgainst ?? 0) - (home.goalsAgainst ?? 0)) * 0.25;
+  const attackDefenseScore = weighted(clamp(attackDefenseRaw, -6, 6), WEIGHTS.attackDefense);
+  scoreParts.push(attackDefenseScore);
+  factors.push({
+    label: "攻守バランス",
+    score: Math.round(attackDefenseScore),
+    description:
+      attackDefenseScore >= 0
+        ? `${home.teamName}の攻守バランスをわずかに評価しています。`
+        : `${away.teamName}の攻守バランスをわずかに評価しています。`,
+  });
+
+  const homeAdvantageScore = weighted(5, WEIGHTS.homeAdvantage);
+  scoreParts.push(homeAdvantageScore);
   factors.push({
     label: "ホーム補正",
-    score: homeAdvantageScore,
+    score: Math.round(homeAdvantageScore),
     description: `${home.teamName}のホーム開催を加点しています。`,
   });
 
-  const totalScore = Math.round(
-    rankScore +
-  pointsScore +
-  goalDiffScore +
-  winRateScore +
-  attackScore +
-  defenseScore +
-  homeAdvantageScore
-  );
+  const h2hFactor = getHeadToHeadDiagnostic(input);
+  factors.push(h2hFactor);
 
-  const outcome = getOutcome(totalScore);
-  const probability = getProbability(totalScore);
+  const homeDrawRate = getDrawRate(home.draws, homeMatches);
+  const awayDrawRate = getDrawRate(away.draws, awayMatches);
+  const drawSignal = getDrawSignal({
+    eloDiff,
+    sideEloDiff,
+    pointsDiff,
+    rankDiff,
+    formDiff,
+    sideFormDiff,
+    homeDrawRate,
+    awayDrawRate,
+  });
+  const strongSideSignal = getStrongSideSignal({
+    sideEloDiff,
+    pointsDiff,
+    rankDiff,
+    winRateDiff,
+  });
+
+  factors.push({
+    label: "Draw Engine",
+    score: Math.round(drawSignal),
+    description:
+      drawSignal >= 2.4
+        ? "両チームの力差が小さいため、僅差ゾーンでは引き分け候補を広めに評価します。"
+        : "片側優位が強い場合は勝敗を優先し、僅差の場合のみ引き分けを検討します。",
+  });
+
+  const totalScore = Math.round(scoreParts.reduce((sum, part) => sum + part, 0));
+  const outcome = getOutcome({ score: totalScore, drawSignal, strongSideSignal });
+  const probability = getProbability(totalScore, drawSignal, outcome);
 
   return {
     matchNo: input.fixture.matchNo,
@@ -168,9 +367,7 @@ export function predictFixture(input: PredictionInput): FixturePrediction {
   };
 }
 
-export function predictFixtures(
-  inputs: PredictionInput[]
-): FixturePrediction[] {
+export function predictFixtures(inputs: PredictionInput[]): FixturePrediction[] {
   return inputs.map(predictFixture);
 }
 

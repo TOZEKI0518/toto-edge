@@ -12,9 +12,7 @@ export async function getJleagueStandings(): Promise<TeamStanding[]> {
   const results = await Promise.all(
     standingUrls.map(async (url) => {
       const html = await fetchHtml(url);
-      const standings = parseJleagueStandingsFromHtml(html);
-
-      return standings;
+      return parseJleagueStandingsFromHtml(html);
     })
   );
 

@@ -2,30 +2,30 @@ import { normalizeTeamName } from "@/lib/teamNameNormalizer";
 import type { PredictionInput, TotoFixture } from "@/types/fixture";
 import type { TeamStanding } from "@/types/standing";
 
+function findStanding(teamName: string, standings: TeamStanding[]) {
+  const normalized = normalizeTeamName(teamName);
+
+  return standings.find(
+    (standing) => normalizeTeamName(standing.teamName) === normalized
+  );
+}
+
 export function buildPredictionInputs(
   fixtures: TotoFixture[],
   standings: TeamStanding[]
 ): PredictionInput[] {
   return fixtures.map((fixture) => {
-    const homeName = normalizeTeamName(fixture.homeTeam);
-    const awayName = normalizeTeamName(fixture.awayTeam);
-
-    const homeStanding = standings.find(
-      (team) => normalizeTeamName(team.teamName) === homeName
-    );
-
-    const awayStanding = standings.find(
-      (team) => normalizeTeamName(team.teamName) === awayName
-    );
+    const homeTeam = normalizeTeamName(fixture.homeTeam);
+    const awayTeam = normalizeTeamName(fixture.awayTeam);
 
     return {
       fixture: {
         ...fixture,
-        homeTeam: homeName,
-        awayTeam: awayName,
+        homeTeam,
+        awayTeam,
       },
-      homeStanding,
-      awayStanding,
+      homeStanding: findStanding(homeTeam, standings),
+      awayStanding: findStanding(awayTeam, standings),
     };
   });
 }

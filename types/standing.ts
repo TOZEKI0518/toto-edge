@@ -1,13 +1,60 @@
+export type HeadToHeadStats = {
+  matches: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  homeMatches: number;
+  homeWins: number;
+  homeDraws: number;
+  homeLosses: number;
+  weightedScore: number;
+  lastResults: Array<"W" | "D" | "L">;
+};
+
 export type TeamStanding = {
   rank: number;
   teamName: string;
   points: number;
   goalDifference: number;
-
+  league?: string;
   matches?: number;
   wins?: number;
   draws?: number;
   losses?: number;
   goalsFor?: number;
   goalsAgainst?: number;
+  eloRating?: number;
+  homeEloRating?: number;
+  awayEloRating?: number;
+  recentFormPoints?: number;
+  recentFormMatches?: number;
+  recentFormLabel?: string;
+  homeRecentFormPoints?: number;
+  homeRecentFormMatches?: number;
+  homeRecentFormLabel?: string;
+  awayRecentFormPoints?: number;
+  awayRecentFormMatches?: number;
+  awayRecentFormLabel?: string;
+  headToHead?: Record<string, HeadToHeadStats>;
+  
+  homeMatches?: number;
+  homeWins?: number;
+  homeDraws?: number;
+  homeLosses?: number;
+  awayMatches?: number;
+  awayWins?: number;
+  awayDraws?: number;
+  awayLosses?: number;
+  homeGoalsFor?: number;
+  homeGoalsAgainst?: number;
+  awayGoalsFor?: number;
+  awayGoalsAgainst?: number;
+  homeWinRate?: number;
+  awayWinRate?: number;
+  homeGoalsPerMatch?: number;
+  awayGoalsPerMatch?: number;
+  homeGoalsAgainstPerMatch?: number;
+  awayGoalsAgainstPerMatch?: number;
+  attackRating?: number;
+  defenseRating?: number;
 };

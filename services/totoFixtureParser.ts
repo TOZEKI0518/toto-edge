@@ -1,39 +1,49 @@
 import * as cheerio from "cheerio";
 import type { TotoFixture } from "@/types/fixture";
 
-const normalizeHalfWidthTeamName = (name: string) =>
-  name.replace(/\s+/g, "").trim();
+const clean = (value: string) => value.replace(/\s+/g, " ").trim();
+const cleanTeam = (value: string) => value.replace(/\s+/g, "").trim();
 
 export function parseTotoFixturesFromHtml(html: string): TotoFixture[] {
+  if (!html) return [];
+
   const $ = cheerio.load(html);
   const fixtures: TotoFixture[] = [];
 
-  const table = $("table").eq(2);
+  $("table").each((_, table) => {
+    $(table)
+      .find("tbody tr, tr")
+      .each((__, row) => {
+        const cells = $(row)
+          .find("th, td")
+          .map((___, cell) => clean($(cell).text()))
+          .get()
+          .filter(Boolean);
 
-  table.find("tbody tr").each((_, row) => {
-    const cells = $(row)
-      .find("th, td")
-      .map((_, cell) => $(cell).text().replace(/\s+/g, " ").trim())
-      .get()
-      .filter(Boolean);
+        if (cells.length < 6) return;
 
-    if (cells.length < 6) return;
+        const matchNoIndex = cells.findIndex((cell) => /^\d{1,2}$/.test(cell));
+        if (matchNoIndex < 0) return;
 
-    const matchNo = Number(cells[2]);
-    const homeTeam = normalizeHalfWidthTeamName(cells[3]);
-    const awayTeam = normalizeHalfWidthTeamName(cells[5]);
+        const matchNo = Number(cells[matchNoIndex]);
+        const homeTeam = cleanTeam(cells[matchNoIndex + 1] ?? cells[3] ?? "");
+        const awayTeam = cleanTeam(cells[matchNoIndex + 3] ?? cells[5] ?? "");
+        const totoResult = cells.find((cell) => /^[012]$/.test(cell));
 
-    if (!matchNo || !homeTeam || !awayTeam) return;
+        if (!matchNo || !homeTeam || !awayTeam) return;
 
-    fixtures.push({
-      matchNo,
-      homeTeam,
-      awayTeam,
-      kickoffAt: cells[0],
-      venue: cells[1],
-      totoResult: cells[6],
-    });
+        if (fixtures.some((fixture) => fixture.matchNo === matchNo)) return;
+
+        fixtures.push({
+          matchNo,
+          homeTeam,
+          awayTeam,
+          kickoffAt: cells[0],
+          venue: cells[1],
+          totoResult,
+        });
+      });
   });
 
-  return fixtures;
+  return fixtures.sort((a, b) => a.matchNo - b.matchNo);
 }

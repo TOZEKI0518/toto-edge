@@ -17,7 +17,18 @@ const labelOutcome = (value: string | null) => {
 
 export default async function RunDetailPage({ params }: RunDetailPageProps) {
   const { runId } = await params;
-  const rows = await getPredictionHistoryByRunId(runId);
+
+  let rows: Awaited<ReturnType<typeof getPredictionHistoryByRunId>> = [];
+  let errorMessage = "";
+
+  try {
+    rows = await getPredictionHistoryByRunId(runId);
+  } catch (error) {
+    errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Prediction History の取得に失敗しました。";
+  }
 
   return (
     <main className="min-h-screen bg-[#05060A] p-6 text-white">
@@ -29,6 +40,12 @@ export default async function RunDetailPage({ params }: RunDetailPageProps) {
         <h1 className="mt-3 text-3xl font-bold">Run #{runId}</h1>
 
         <AppNav />
+
+        {errorMessage && (
+          <section className="mt-6 rounded-3xl border border-yellow-400/20 bg-yellow-400/10 p-5">
+            <p className="text-yellow-200">{errorMessage}</p>
+          </section>
+        )}
 
         <section className="mt-8 grid gap-4">
           {rows.map((row) => (

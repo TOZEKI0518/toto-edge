@@ -52,9 +52,6 @@ export default async function BacktestInspectPage({
             Target rounds: {targetRounds[targetRounds.length - 1]} -{" "}
             {targetRounds[0]}
           </p>
-          <p className="mt-2 text-sm text-white/45">
-            現在のJリーグ順位表と照合できた試合が1件以上ある開催回を候補として表示しています。
-          </p>
         </section>
 
         <section className="mt-8 overflow-hidden rounded-3xl border border-white/10">
@@ -62,9 +59,12 @@ export default async function BacktestInspectPage({
             <thead className="bg-white/[0.06] text-white/60">
               <tr>
                 <th className="px-4 py-3">Round</th>
+                <th className="px-4 py-3">Fixtures</th>
                 <th className="px-4 py-3">J.League Matches</th>
                 <th className="px-4 py-3">Hit</th>
                 <th className="px-4 py-3">Rate</th>
+                <th className="px-4 py-3">Coverage</th>
+                <th className="px-4 py-3">Data</th>
                 <th className="px-4 py-3">Detail</th>
               </tr>
             </thead>
@@ -79,12 +79,25 @@ export default async function BacktestInspectPage({
                   }
                 >
                   <td className="px-4 py-3">{result.round}</td>
+                  <td className="px-4 py-3">{result.totalFixtures}</td>
                   <td className="px-4 py-3">{result.totalMatches}</td>
                   <td className="px-4 py-3">
                     {result.hitCount} / {result.totalMatches}
                   </td>
                   <td className="px-4 py-3 font-bold text-cyan-300">
                     {result.hitRate}%
+                  </td>
+                  <td className="px-4 py-3">{result.coverageRate}%</td>
+                  <td className="px-4 py-3 text-white/60">
+                    {result.dataSource === "date_cut" && result.snapshotDate
+                      ? `${result.snapshotDate}以前`
+                      : result.dataSource === "round_snapshot" && result.snapshotRoundNo
+                      ? `第${result.snapshotRoundNo}回`
+                      : result.dataSource === "snapshot" && result.snapshotDate
+                      ? result.snapshotDate
+                      : result.dataSource === "current"
+                      ? "現在"
+                      : "なし"}
                   </td>
                   <td className="px-4 py-3">
                     <Link

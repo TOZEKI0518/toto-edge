@@ -1,0 +1,37 @@
+﻿team,player_name,player_key,position,shirt_number,starter,bench,entered_minute,left_minute,minutes,appeared,match_card_id
+FC東京,アダイウトン,FC東京::アダイウトン,FW,15,False,True,67.0,90.0,23,True,24973
+FC東京,ジョアン オマリ,FC東京::ジョアンオマリ,DF,32,True,False,0.0,90.0,90,True,24973
+FC東京,レアンドロ,FC東京::レアンドロ,FW,20,True,False,0.0,90.0,90,True,24973
+FC東京,三田 啓貴,FC東京::三田啓貴,MF,7,False,True,67.0,90.0,23,True,24973
+FC東京,中村 帆高,FC東京::中村帆高,DF,37,True,False,0.0,90.0,90,True,24973
+FC東京,丹羽 大輝,FC東京::丹羽大輝,DF,5,False,True,,,0,False,24973
+FC東京,児玉 剛,FC東京::児玉剛,GK,1,False,True,,,0,False,24973
+FC東京,内田 宅哉,FC東京::内田宅哉,MF,28,False,True,90.0,90.0,0,True,24973
+FC東京,原 大智,FC東京::原大智,FW,24,True,False,0.0,67.0,67,True,24973
+FC東京,品田 愛斗,FC東京::品田愛斗,MF,44,False,True,,,0,False,24973
+FC東京,安部 柊斗,FC東京::安部柊斗,MF,31,True,False,0.0,90.0,90,True,24973
+FC東京,小川 諒也,FC東京::小川諒也,DF,6,True,False,0.0,90.0,90,True,24973
+FC東京,東 慶悟,FC東京::東慶悟,MF,10,True,False,0.0,67.0,67,True,24973
+FC東京,森重 真人,FC東京::森重真人,MF,3,True,False,0.0,90.0,90,True,24973
+FC東京,永井 謙佑,FC東京::永井謙佑,FW,11,True,False,0.0,90.0,90,True,24973
+FC東京,波多野 豪,FC東京::波多野豪,GK,13,True,False,0.0,90.0,90,True,24973
+FC東京,渡辺 剛,FC東京::渡辺剛,DF,4,True,False,0.0,90.0,90,True,24973
+FC東京,紺野 和也,FC東京::紺野和也,FW,38,False,True,,,0,False,24973
+柏レイソル,オルンガ,柏レイソル::オルンガ,FW,14,True,False,0.0,90.0,90,True,24973
+柏レイソル,キム スンギュ,柏レイソル::キムスンギュ,GK,17,True,False,0.0,90.0,90,True,24973
+柏レイソル,クリスティアーノ,柏レイソル::クリスティアーノ,MF,9,True,False,0.0,90.0,90,True,24973
+柏レイソル,ヒシャルジソン,柏レイソル::ヒシャルジソン,MF,8,True,False,0.0,86.0,86,True,24973
+柏レイソル,三丸 拡,柏レイソル::三丸拡,DF,20,False,True,,,0,False,24973
+柏レイソル,三原 雅俊,柏レイソル::三原雅俊,MF,27,False,True,78.0,90.0,12,True,24973
+柏レイソル,仲間 隼斗,柏レイソル::仲間隼斗,MF,33,False,True,86.0,90.0,4,True,24973
+柏レイソル,古賀 太陽,柏レイソル::古賀太陽,DF,4,True,False,0.0,90.0,90,True,24973
+柏レイソル,呉屋 大翔,柏レイソル::呉屋大翔,FW,19,False,True,78.0,90.0,12,True,24973
+柏レイソル,大南 拓磨,柏レイソル::大南拓磨,DF,25,True,False,0.0,90.0,90,True,24973
+柏レイソル,大谷 秀和,柏レイソル::大谷秀和,MF,7,True,False,0.0,78.0,78,True,24973
+柏レイソル,山下 達也,柏レイソル::山下達也,DF,50,True,False,0.0,90.0,90,True,24973
+柏レイソル,川口 尚紀,柏レイソル::川口尚紀,DF,24,True,False,0.0,90.0,90,True,24973
+柏レイソル,染谷 悠太,柏レイソル::染谷悠太,DF,15,False,True,,,0,False,24973
+柏レイソル,江坂 任,柏レイソル::江坂任,FW,10,True,False,0.0,78.0,78,True,24973
+柏レイソル,滝本 晴彦,柏レイソル::滝本晴彦,GK,16,False,True,,,0,False,24973
+柏レイソル,瀬川 祐輔,柏レイソル::瀬川祐輔,MF,18,True,False,0.0,78.0,78,True,24973
+柏レイソル,神谷 優太,柏レイソル::神谷優太,MF,39,False,True,78.0,90.0,12,True,24973

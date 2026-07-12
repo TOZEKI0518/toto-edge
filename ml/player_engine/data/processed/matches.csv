@@ -1,0 +1,2 @@
+﻿match_card_id,match_date,kickoff_time,stadium,attendance,weather,temperature_c,humidity_pct,home_team,away_team,home_score,away_score,home_first_half_score,away_first_half_score,home_second_half_score,away_second_half_score,home_coach,away_coach,regulation_minutes,source_html
+24973,2021/01/04,14:41,国立競技場,24219,晴,11.4,36.0,柏レイソル,FC東京,1,2,1,1,0,1,ネルシーニョ,長谷川 健太,90,C:\Users\81805\toto-edge\ml\player_engine\data\raw\matches\html\match_24973.html
