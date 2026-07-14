@@ -1,0 +1,95 @@
+export type TotoOutcome = "A" | "D" | "H";
+export type ConfidenceLevel = "HIGH" | "MEDIUM" | "LOW";
+export type PurchaseDecision = "BUY" | "SKIP";
+
+export type TotoRoundRun = {
+  round_id: number;
+  decision: PurchaseDecision;
+  reason: string;
+  investment_yen: number;
+  ticket_count: number;
+  available_budget_yen: number;
+  normal_budget_yen: number;
+  rollover_before_yen: number;
+  rollover_after_yen: number;
+  estimated_portfolio_value_index: number | null;
+  estimated_expected_return_yen: number | null;
+  estimated_expected_profit_yen: number | null;
+  model_coverage_probability: number;
+  market_coverage_probability: number;
+  high_confidence_matches: number;
+  medium_confidence_matches: number;
+  low_confidence_matches: number;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export type TotoMatchPrediction = {
+  round_id: number;
+  toto_match_no: number;
+  match_card_id: number;
+  match_date: string | null;
+  home_team: string;
+  away_team: string;
+  prediction: TotoOutcome;
+  prob_away: number;
+  prob_draw: number;
+  prob_home: number;
+  rf_prediction: TotoOutcome | null;
+  rf_prob_away: number | null;
+  rf_prob_draw: number | null;
+  rf_prob_home: number | null;
+  lgbm_prediction: TotoOutcome | null;
+  lgbm_prob_away: number | null;
+  lgbm_prob_draw: number | null;
+  lgbm_prob_home: number | null;
+  market_prob_away: number;
+  market_prob_draw: number;
+  market_prob_home: number;
+  best_edge: number | null;
+  best_value_ratio: number | null;
+  best_value_pick: TotoOutcome | null;
+  value_score: number | null;
+  roi_priority_score: number | null;
+  models_agree: boolean | null;
+  ai_market_agree: boolean | null;
+  confidence_score: number | null;
+  confidence_level: ConfidenceLevel | null;
+  coverage_recommendation: "SINGLE" | "DOUBLE" | "TRIPLE" | null;
+  recommended_combination: string | null;
+  primary_pick: TotoOutcome | null;
+  secondary_pick: TotoOutcome | null;
+  model_disagreement_js: number | null;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export type TotoRoundTicket = {
+  round_id: number;
+  ticket_number: number;
+  ticket_cost_yen: number;
+  picks: string;
+  model_probability: number | null;
+  market_probability: number | null;
+  conservative_value_index: number | null;
+  search_score: number | null;
+  match_01: TotoOutcome | null;
+  match_02: TotoOutcome | null;
+  match_03: TotoOutcome | null;
+  match_04: TotoOutcome | null;
+  match_05: TotoOutcome | null;
+  match_06: TotoOutcome | null;
+  match_07: TotoOutcome | null;
+  match_08: TotoOutcome | null;
+  match_09: TotoOutcome | null;
+  match_10: TotoOutcome | null;
+  match_11: TotoOutcome | null;
+  match_12: TotoOutcome | null;
+  match_13: TotoOutcome | null;
+};
+
+export type CurrentRoundDashboardData = {
+  run: TotoRoundRun | null;
+  matches: TotoMatchPrediction[];
+  tickets: TotoRoundTicket[];
+};
