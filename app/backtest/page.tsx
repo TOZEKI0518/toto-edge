@@ -3,6 +3,7 @@ import { AppNav } from "@/components/AppNav";
 import { getOutcomeLabel } from "@/services/fixturePredictionService";
 import { runBacktestForRound } from "@/services/backtestService";
 import { leagueBadgeClass, leagueBadgeLabel } from "@/services/leagueClassifier";
+import { runOptimizerTicketBacktest } from "@/services/optimizerBacktestService";
 
 type BacktestPageProps = {
   searchParams?: Promise<{
@@ -33,6 +34,10 @@ export default async function BacktestPage({
         ? error.message
         : "バックテストの取得に失敗しました。";
   }
+
+  const optimizerBacktest = result
+    ? runOptimizerTicketBacktest(result, 50)
+    : null;
 
   return (
     <main className="min-h-screen bg-[#05060A] p-6 text-white">
@@ -108,6 +113,124 @@ export default async function BacktestPage({
                   : "なし"}
               </p>
             </section>
+
+
+            {optimizerBacktest && (
+              <section className="mt-6 rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.06] p-6">
+                <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <p className="text-sm text-emerald-200">
+                      Recommended 50 Tickets Backtest
+                    </p>
+                    <h2 className="mt-2 text-2xl font-black">
+                      50口買っていた場合
+                    </h2>
+                    <p className="mt-2 text-sm text-white/50">
+                      投資額 {optimizerBacktest.investmentYen.toLocaleString("ja-JP")}円
+                      {" / "}実結果 {optimizerBacktest.actualPicks || "-"}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    <div className="rounded-2xl bg-black/20 p-3">
+                      <p className="text-xs text-white/45">Best Hits</p>
+                      <p className="mt-1 text-2xl font-black text-cyan-200">
+                        {optimizerBacktest.maxHitCount} / {optimizerBacktest.matchCount}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-black/20 p-3">
+                      <p className="text-xs text-white/45">
+                        {optimizerBacktest.matchCount === 13
+                          ? "1等相当"
+                          : `${optimizerBacktest.matchCount}/${optimizerBacktest.matchCount}`}
+                      </p>
+                      <p className="mt-1 text-2xl font-black">
+                        {optimizerBacktest.matchCount === 13
+                          ? optimizerBacktest.firstPrizeEquivalentCount
+                          : optimizerBacktest.tickets.filter(
+                              (ticket) =>
+                                ticket.hitCount === optimizerBacktest.matchCount
+                            ).length}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-black/20 p-3">
+                      <p className="text-xs text-white/45">
+                        {optimizerBacktest.matchCount === 13
+                          ? "2等相当"
+                          : `${Math.max(optimizerBacktest.matchCount - 1, 0)}/${optimizerBacktest.matchCount}`}
+                      </p>
+                      <p className="mt-1 text-2xl font-black">
+                        {optimizerBacktest.matchCount === 13
+                          ? optimizerBacktest.secondPrizeEquivalentCount
+                          : optimizerBacktest.tickets.filter(
+                              (ticket) =>
+                                ticket.hitCount === optimizerBacktest.matchCount - 1
+                            ).length}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-black/20 p-3">
+                      <p className="text-xs text-white/45">
+                        {optimizerBacktest.matchCount === 13
+                          ? "3等相当"
+                          : `${Math.max(optimizerBacktest.matchCount - 2, 0)}/${optimizerBacktest.matchCount}`}
+                      </p>
+                      <p className="mt-1 text-2xl font-black">
+                        {optimizerBacktest.matchCount === 13
+                          ? optimizerBacktest.thirdPrizeEquivalentCount
+                          : optimizerBacktest.tickets.filter(
+                              (ticket) =>
+                                ticket.hitCount === optimizerBacktest.matchCount - 2
+                            ).length}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 overflow-x-auto">
+                  <table className="min-w-full text-left text-sm">
+                    <thead className="text-xs text-white/40">
+                      <tr className="border-b border-white/10">
+                        <th className="px-3 py-3">#</th>
+                        <th className="px-3 py-3">Picks</th>
+                        <th className="px-3 py-3">Hits</th>
+                        <th className="px-3 py-3">判定</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {optimizerBacktest.tickets.map((ticket) => (
+                        <tr key={ticket.rank} className="border-b border-white/[0.06]">
+                          <td className="px-3 py-3 text-white/45">{ticket.rank}</td>
+                          <td className="px-3 py-3 font-mono tracking-wider">{ticket.picks}</td>
+                          <td className="px-3 py-3 font-bold text-cyan-200">
+                            {ticket.hitCount} / {optimizerBacktest.matchCount}
+                          </td>
+                          <td className="px-3 py-3">
+                            {optimizerBacktest.matchCount === 13
+                              ? ticket.isFirstPrizeEquivalent
+                                ? "1等相当"
+                                : ticket.isSecondPrizeEquivalent
+                                ? "2等相当"
+                                : ticket.isThirdPrizeEquivalent
+                                ? "3等相当"
+                                : "-"
+                              : ticket.hitCount === optimizerBacktest.matchCount
+                              ? `${optimizerBacktest.matchCount}/${optimizerBacktest.matchCount}`
+                              : ticket.hitCount === optimizerBacktest.matchCount - 1
+                              ? `${optimizerBacktest.matchCount - 1}/${optimizerBacktest.matchCount}`
+                              : ticket.hitCount === optimizerBacktest.matchCount - 2
+                              ? `${optimizerBacktest.matchCount - 2}/${optimizerBacktest.matchCount}`
+                              : "-"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <p className="mt-4 text-xs leading-5 text-white/40">
+                  {optimizerBacktest.monetaryRoiNote}
+                </p>
+              </section>
+            )}
 
             {result.totalMatches === 0 && (
               <section className="mt-6 rounded-3xl border border-yellow-400/20 bg-yellow-400/10 p-5">
