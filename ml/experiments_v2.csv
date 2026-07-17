@@ -1,2 +1,0 @@
-﻿created_at,model,rows,features,mean_accuracy,overall_accuracy,best_window_accuracy,worst_window_accuracy,draw_accuracy,memo
-2026-07-10T21:39:02,RandomForest,841,26,0.4293,0.4315,0.4732,0.3889,0.166667,RF v2.0 stable log

@@ -1,0 +1,14 @@
+{
+  "input_matches_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\player_engine\\data\\processed\\matches.csv",
+  "output_features_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\player_engine\\data\\processed\\historical_h2h_features.csv",
+  "rows": 5555,
+  "columns": 33,
+  "duplicate_match_card_ids": 0,
+  "missing_values": 0,
+  "rows_without_history": 1099,
+  "rows_with_history": 4456,
+  "history_match_count_mean": 2.7987398739873988,
+  "history_match_count_median": 2.0,
+  "history_match_count_max": 10,
+  "confidence_mean": 0.3467371737173717
+}

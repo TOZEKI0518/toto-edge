@@ -1,0 +1,13 @@
+{
+  "source_type": "match_detail",
+  "source_id": "30535",
+  "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30535",
+  "fetched_at_utc": "2026-07-13T00:43:23.254663+00:00",
+  "status_code": 200,
+  "encoding": "utf-8",
+  "content_length": 110178,
+  "sha256": "f3a481821305b1566ba1f83f083a1a3417107db1d83cbb639bc4abd25e2ba39d",
+  "html_path": "C:\\Users\\81805\\toto-edge-git\\ml\\player_engine\\data\\raw\\matches\\html\\match_30535.html",
+  "metadata_path": "C:\\Users\\81805\\toto-edge-git\\ml\\player_engine\\data\\raw\\matches\\metadata\\match_30535.json",
+  "from_cache": false
+}

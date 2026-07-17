@@ -1,0 +1,35 @@
+{
+  "rows": 463,
+  "round_from": 1515,
+  "round_to": 1632,
+  "baseline_features": 67,
+  "v3_features": 82,
+  "models": {
+    "RandomForest v2": {
+      "model": "RandomForest v2",
+      "rows": 318,
+      "accuracy": 0.3805031446540881,
+      "macro_f1": 0.3248571420096667,
+      "weighted_f1": 0.3650647311255485,
+      "log_loss": 1.1293875964562434,
+      "draw_precision": 0.18421052631578946,
+      "draw_recall": 0.10606060606060606,
+      "draw_f1": 0.1346153846153846,
+      "home_recall": 0.5289855072463768,
+      "away_recall": 0.35964912280701755
+    },
+    "RandomForest v3": {
+      "model": "RandomForest v3",
+      "rows": 318,
+      "accuracy": 0.3805031446540881,
+      "macro_f1": 0.3061708860759494,
+      "weighted_f1": 0.3561470026271794,
+      "log_loss": 1.1210706784922988,
+      "draw_precision": 0.1,
+      "draw_recall": 0.045454545454545456,
+      "draw_f1": 0.0625,
+      "home_recall": 0.5507246376811594,
+      "away_recall": 0.3684210526315789
+    }
+  }
+}

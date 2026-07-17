@@ -1,0 +1,12 @@
+{
+  "round_from": 1200,
+  "round_to": 1617,
+  "target_year_from": 2022,
+  "target_year_to": 2025,
+  "rounds_scanned": 418,
+  "rounds_uploaded": 274,
+  "rounds_dry_run_ready": 0,
+  "fixture_rows": 3036,
+  "output_dir": "C:\\Users\\81805\\toto-edge-git\\ml\\historical_toto_backfill",
+  "completed_at": "2026-07-17T00:34:26.551072"
+}

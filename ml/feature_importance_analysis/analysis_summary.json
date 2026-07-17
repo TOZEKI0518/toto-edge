@@ -1,0 +1,9 @@
+{
+  "total_features": 80,
+  "top_consensus_features": 30,
+  "low_importance_features": 20,
+  "high_disagreement_features": 8,
+  "random_forest_only_features": 0,
+  "lightgbm_only_features": 0,
+  "common_features": 80
+}

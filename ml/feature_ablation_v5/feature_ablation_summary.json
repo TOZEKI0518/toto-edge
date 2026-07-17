@@ -1,0 +1,9 @@
+{
+  "best_removed_count": 0,
+  "best_feature_count": 80,
+  "best_accuracy": 0.3680586406041759,
+  "best_macro_f1": 0.34373872844378583,
+  "best_weighted_f1": 0.35891812036644277,
+  "best_log_loss": 1.0971021154169527,
+  "removed_features": []
+}

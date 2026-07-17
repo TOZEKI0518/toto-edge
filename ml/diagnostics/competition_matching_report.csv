@@ -1,0 +1,10 @@
+﻿competition_key,diagnosis,rows
+J.League,home_away_reversed,419
+J.League,team_not_in_player_data,344
+Unknown,team_not_in_player_data,279
+J.League,matched_by_team_date,72
+Cup/Other,team_not_in_player_data,54
+National Team,team_not_in_player_data,8
+Cup/Other,matched_by_team_date,7
+J.League,missing_training_date,3
+Cup/Other,missing_training_date,1

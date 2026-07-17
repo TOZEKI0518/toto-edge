@@ -1,0 +1,30 @@
+{
+  "configuration": {
+    "matches_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\true_backtest_v6\\v6_true_backtest_matches.csv",
+    "output_dir": "C:\\Users\\81805\\toto-edge-git\\ml\\confidence_diagnostics_v6",
+    "target_match_count": 13,
+    "fixed_count": 8
+  },
+  "rounds_evaluated": 127,
+  "matches_evaluated": 1651,
+  "overall_top1_accuracy": 0.3985463355542096,
+  "overall_top2_coverage": 0.6953361599030891,
+  "fixed_strategy": {
+    "fixed_count": 8,
+    "double_count": 5,
+    "base_ticket_count": 32,
+    "fixed_match_accuracy": 0.4202755905511811,
+    "fixed_all_correct_rounds": 1,
+    "fixed_all_correct_rate": 0.007874015748031496,
+    "fixed_one_miss_or_better_rounds": 6,
+    "fixed_one_miss_or_better_rate": 0.047244094488188976,
+    "double_match_top2_coverage": 0.6992125984251969,
+    "doubles_all_covered_rounds": 39,
+    "doubles_all_covered_rate": 0.30708661417322836,
+    "exact_result_covered_rounds": 0,
+    "exact_result_covered_rate": 0.0,
+    "average_strategy_best_hits": 6.858267716535433,
+    "one_miss_or_better_rounds": 3,
+    "two_miss_or_better_rounds": 7
+  }
+}

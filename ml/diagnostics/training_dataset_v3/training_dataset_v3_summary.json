@@ -1,0 +1,19 @@
+{
+  "source_rows": 5555,
+  "source_columns": 96,
+  "h2h_rows": 5555,
+  "h2h_columns": 33,
+  "output_rows": 5555,
+  "output_columns": 128,
+  "added_h2h_features": 32,
+  "duplicate_match_ids": 0,
+  "unmatched_h2h_rows": 0,
+  "h2h_missing_values": 0,
+  "total_missing_values": 12589,
+  "infinite_numeric_values": 0,
+  "generator_version": "3.0",
+  "created_at": "2026-07-14T20:10:57.793167",
+  "training_v2_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\training_dataset_v2.csv",
+  "h2h_features_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\player_engine\\data\\processed\\historical_h2h_features.csv",
+  "output_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\training_dataset_v3.csv"
+}

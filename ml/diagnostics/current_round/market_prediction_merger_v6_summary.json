@@ -1,0 +1,27 @@
+{
+  "rows": 13,
+  "round_ids": [
+    1631
+  ],
+  "duplicate_join_keys": 0,
+  "missing_values": 0,
+  "positive_edge_rows": 13,
+  "strong_edge_rows": 9,
+  "extreme_edge_rows": 1,
+  "ai_market_agreement_rows": 10,
+  "mean_best_edge": 0.13667078948536268,
+  "max_best_edge": 0.28262144475166445,
+  "mean_best_value_ratio": 1.7698109798241515,
+  "mean_value_score": 0.1923177701345763,
+  "mean_roi_priority_score": 0.20817922405486464,
+  "best_value_match": {
+    "round_id": 1631,
+    "toto_match_no": 11,
+    "home_team": "ベガルタ仙台",
+    "away_team": "横浜FC",
+    "best_value_pick": "A",
+    "best_edge": 0.28262144475166445,
+    "best_value_ratio": 2.5410111491366654,
+    "roi_priority_score": 0.6003289153055561
+  }
+}

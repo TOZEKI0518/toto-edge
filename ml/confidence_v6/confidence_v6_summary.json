@@ -1,0 +1,29 @@
+{
+  "rows": 4502,
+  "high_confidence_rows": 277,
+  "medium_confidence_rows": 1419,
+  "low_confidence_rows": 2806,
+  "single_rows": 262,
+  "double_rows": 2046,
+  "triple_rows": 2194,
+  "overall_accuracy": 0.37716570413149714,
+  "single_accuracy": 0.4618320610687023,
+  "double_coverage_rate": 0.7023460410557185,
+  "triple_coverage_rate": 1.0,
+  "mean_confidence_score": 0.2932741297700608,
+  "mean_model_disagreement": 0.10035848199817138,
+  "market_data_available": false,
+  "configuration": {
+    "input_predictions_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\ensemble_v6\\ensemble_v6_predictions.csv",
+    "output_dir": "C:\\Users\\81805\\toto-edge-git\\ml\\confidence_v6",
+    "market_csv": null,
+    "single_threshold": 0.48,
+    "double_threshold": 0.4,
+    "single_margin_threshold": 0.08,
+    "double_margin_threshold": 0.03,
+    "max_single_disagreement": 0.14,
+    "max_double_disagreement": 0.2,
+    "high_confidence_threshold": 0.45,
+    "medium_confidence_threshold": 0.3
+  }
+}

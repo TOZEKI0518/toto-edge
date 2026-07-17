@@ -1,0 +1,2 @@
+﻿round_id,decision,reason,investment_yen,ticket_count,available_budget_yen,normal_budget_yen,rollover_before_yen,rollover_after_yen,estimated_portfolio_value_index,estimated_expected_return_yen,estimated_expected_profit_yen,model_coverage_probability,market_coverage_probability,high_confidence_matches,medium_confidence_matches,low_confidence_matches
+1631,BUY,Conservative portfolio value index 1.2002 >= 1.1000.,5000,50,5000,5000,0,0,1.2002171822542909,,,0.00015199119045835067,8.023625406343199e-07,1,8,4

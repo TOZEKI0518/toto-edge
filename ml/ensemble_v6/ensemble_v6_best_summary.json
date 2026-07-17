@@ -1,0 +1,31 @@
+{
+  "best_strategy": "fixed_rf60_lgbm40",
+  "selection_method": "minimum sum of Accuracy rank, Macro F1 rank, and Log Loss rank",
+  "rf_predictions_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\rf_v6\\randomforest_v6_predictions.csv",
+  "lgbm_predictions_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\lgbm_v6\\lgbm_v6_predictions.csv",
+  "metrics": {
+    "strategy": "fixed_rf60_lgbm40",
+    "description": "Fixed blend: RF 60%, LGBM 40%",
+    "rows": 4502,
+    "accuracy": 0.37716570413149714,
+    "macro_f1": 0.35270688534381894,
+    "weighted_f1": 0.36885921582222586,
+    "log_loss": 1.102121947675714,
+    "away_precision": 0.35782512858192506,
+    "away_recall": 0.3288318703578663,
+    "away_f1": 0.342716396903589,
+    "draw_precision": 0.27759914255091106,
+    "draw_recall": 0.21709974853310982,
+    "draw_f1": 0.2436500470366886,
+    "home_precision": 0.4311594202898551,
+    "home_recall": 0.5207877461706784,
+    "home_f1": 0.4717542120911794,
+    "predicted_away": 1361,
+    "predicted_draw": 933,
+    "predicted_home": 2208,
+    "accuracy_rank": 2,
+    "macro_f1_rank": 7,
+    "log_loss_rank": 2,
+    "composite_rank_score": 11
+  }
+}

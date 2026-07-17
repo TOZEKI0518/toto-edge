@@ -1,0 +1,44 @@
+{
+  "rows": 13,
+  "round_ids": [
+    1631
+  ],
+  "rf_weight": 0.6,
+  "lgbm_weight": 0.4,
+  "duplicate_match_card_ids": 0,
+  "missing_output_values": 0,
+  "rf_lgbm_agreement_rows": 11,
+  "prediction_counts": {
+    "A": 6,
+    "D": 1,
+    "H": 6
+  },
+  "mean_top_probability": 0.4118740213391035,
+  "mean_probability_margin": 0.09042932735591142,
+  "mean_model_probability_gap": 0.07497680090235127,
+  "mean_best_edge": 0.13667078948536268,
+  "rf_diagnostics": {
+    "model": "RandomForest v6",
+    "feature_count": 112,
+    "missing_feature_columns": [],
+    "missing_feature_column_count": 0,
+    "non_numeric_feature_columns": [],
+    "non_numeric_feature_column_count": 0,
+    "missing_values_before_pipeline": 6,
+    "infinite_values_replaced": 0,
+    "probability_sum_min": 0.9999999999999998,
+    "probability_sum_max": 1.0000000000000002
+  },
+  "lgbm_diagnostics": {
+    "model": "LightGBM v6",
+    "feature_count": 112,
+    "missing_feature_columns": [],
+    "missing_feature_column_count": 0,
+    "non_numeric_feature_columns": [],
+    "non_numeric_feature_column_count": 0,
+    "missing_values_before_pipeline": 6,
+    "infinite_values_replaced": 0,
+    "probability_sum_min": 0.9999999999999998,
+    "probability_sum_max": 1.0000000000000002
+  }
+}

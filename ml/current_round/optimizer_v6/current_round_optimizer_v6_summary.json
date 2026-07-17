@@ -1,0 +1,19 @@
+{
+  "round_id": 1631,
+  "decision": "BUY",
+  "reason": "Conservative portfolio value index 1.2002 >= 1.1000.",
+  "investment_yen": 5000,
+  "ticket_count": 50,
+  "available_budget_yen": 5000,
+  "normal_budget_yen": 5000,
+  "rollover_before_yen": 0,
+  "rollover_after_yen": 0,
+  "estimated_portfolio_value_index": 1.2002171822542909,
+  "estimated_expected_return_yen": null,
+  "estimated_expected_profit_yen": null,
+  "model_coverage_probability": 0.00015199119045835067,
+  "market_coverage_probability": 8.023625406343199e-07,
+  "high_confidence_matches": 1,
+  "medium_confidence_matches": 8,
+  "low_confidence_matches": 4
+}

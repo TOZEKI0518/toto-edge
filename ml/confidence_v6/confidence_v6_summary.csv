@@ -1,0 +1,2 @@
+﻿rows,high_confidence_rows,medium_confidence_rows,low_confidence_rows,single_rows,double_rows,triple_rows,overall_accuracy,single_accuracy,double_coverage_rate,triple_coverage_rate,mean_confidence_score,mean_model_disagreement,market_data_available
+4502,277,1419,2806,262,2046,2194,0.37716570413149714,0.4618320610687023,0.7023460410557185,1.0,0.2932741297700608,0.10035848199817138,False

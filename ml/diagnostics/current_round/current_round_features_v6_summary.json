@@ -1,0 +1,22 @@
+{
+  "rows": 13,
+  "columns": 130,
+  "duplicate_match_card_ids": 0,
+  "team_feature_matched_rows": 13,
+  "position_feature_matched_rows": 13,
+  "model_feature_columns": 118,
+  "model_feature_missing_values": 6,
+  "fully_complete_model_rows": 9,
+  "top_missing_columns": {
+    "available_count_GKRatio": 2,
+    "core_GKRatio": 1,
+    "available_count_MFRatio": 1,
+    "available_count_FWRatio": 1,
+    "momentum_GKRatio": 1
+  },
+  "date_min": "2026-05-23",
+  "date_max": "2026-05-24",
+  "round_ids": [
+    1631
+  ]
+}

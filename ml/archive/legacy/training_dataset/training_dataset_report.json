@@ -1,0 +1,14 @@
+{
+  "training_rows": 1187,
+  "unique_toto_rounds": 116,
+  "round_from": 1506,
+  "round_to": 1632,
+  "unique_normalized_teams": 208,
+  "match_class_counts": {
+    "J1": 481,
+    "Other": 374,
+    "Mixed Domestic": 171,
+    "J2": 142,
+    "J3": 19
+  }
+}

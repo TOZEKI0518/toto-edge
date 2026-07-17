@@ -1,0 +1,15 @@
+{
+  "rows": 5555,
+  "columns": 96,
+  "numeric_features": 86,
+  "duplicate_match_ids": 0,
+  "missing_match_ids": 0,
+  "missing_dates": 0,
+  "missing_home_teams": 0,
+  "missing_away_teams": 0,
+  "missing_results": 0,
+  "team_feature_match_rows": 5555,
+  "position_feature_match_rows": 5555,
+  "created_at": "2026-07-14T00:11:02.527452",
+  "output_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\training_dataset_v2.csv"
+}

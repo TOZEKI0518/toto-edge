@@ -1,0 +1,15 @@
+{
+  "round_id": 1631,
+  "rows": 13,
+  "feature_columns": 19,
+  "missing_team_names": 0,
+  "duplicate_match_numbers": 0,
+  "missing_probability_values": 0,
+  "probability_sum_min": 1.0,
+  "probability_sum_max": 1.0,
+  "historical_rows": 26,
+  "current_market_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\market_data\\current_toto_market.csv",
+  "current_features_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\market_data\\current_market_features.csv",
+  "historical_csv": "C:\\Users\\81805\\toto-edge-git\\ml\\market_data\\historical_market.csv",
+  "source_url": "https://sp.toto-dream.com/dcs/subos/screen/si01/ssin025/PGSSIN02501ForwardVotetotoSP.form?commodityId=01&fromId=SSIN026&gameAssortment=9&holdCntId=1631"
+}

@@ -1,0 +1,1201 @@
+{
+  "rf_rows": 4502,
+  "rf_date_min": "2022-02-18T00:00:00",
+  "rf_date_max": "2025-12-06T00:00:00",
+  "fixture_rows": 226,
+  "fixture_round_min": 1618,
+  "fixture_round_max": 1637,
+  "fixture_date_min": "0001-03-21T00:00:00",
+  "fixture_date_max": "0001-06-28T00:00:00",
+  "prediction_unique_pairs": 1944,
+  "fixture_unique_pairs": 226,
+  "exact_pair_overlap_count": 111,
+  "exact_pair_overlap_sample": [
+    "c大阪||fc東京",
+    "c大阪||京都",
+    "c大阪||名古屋",
+    "c大阪||神戸",
+    "c大阪||福岡",
+    "fc東京||c大阪",
+    "fc東京||川崎f",
+    "fc東京||東京v",
+    "fc東京||町田",
+    "g大阪||c大阪",
+    "g大阪||京都",
+    "g大阪||岡山",
+    "g大阪||広島",
+    "g大阪||東京v",
+    "g大阪||神戸",
+    "京都||g大阪",
+    "京都||名古屋",
+    "京都||岡山",
+    "京都||広島",
+    "京都||柏"
+  ],
+  "unmatched_fixture_team_count": 61,
+  "unmatched_fixture_teams": [
+    "いわき",
+    "今治",
+    "八戸",
+    "南ｱﾌﾘｶ",
+    "宮崎",
+    "山口",
+    "日本",
+    "栃木Ｃ",
+    "滋賀",
+    "琉球",
+    "相模原",
+    "福島",
+    "藤枝",
+    "長崎",
+    "韓国",
+    "高知",
+    "鳥取",
+    "鹿児島",
+    "ｱﾒﾘｶ",
+    "ｱﾙｼﾞｪﾘ",
+    "ｱﾙｾﾞﾝﾁ",
+    "ｲﾝｸﾞﾗﾝ",
+    "ｳｽﾞﾍﾞｷ",
+    "ｳﾙｸﾞｱｲ",
+    "ｴｸｱﾄﾞﾙ",
+    "ｴｼﾞﾌﾟﾄ",
+    "ｵｰｽﾄﾗﾘ",
+    "ｵｰｽﾄﾘｱ",
+    "ｵﾗﾝﾀﾞ",
+    "ｶｰﾎﾞﾍﾞ",
+    "ｶﾀｰﾙ",
+    "ｶﾅﾀﾞ",
+    "ｶﾞｰﾅ",
+    "ｷｭﾗｿｰ",
+    "ｸﾛｱﾁｱ",
+    "ｺｰﾄｼﾞﾎ",
+    "ｺﾛﾝﾋﾞｱ",
+    "ｺﾝｺﾞ",
+    "ｻｳｼﾞ",
+    "ｽｲｽ",
+    "ｽｳｪﾃﾞﾝ",
+    "ｽｺｯﾄﾗﾝ",
+    "ｽﾍﾟｲﾝ",
+    "ｾﾈｶﾞﾙ",
+    "ﾁｪｺ",
+    "ﾁｭﾆｼﾞｱ",
+    "ﾄﾙｺ",
+    "ﾄﾞｲﾂ",
+    "ﾆｭｰｼﾞｰ",
+    "ﾉﾙｳｪｰ",
+    "ﾊｲﾁ",
+    "ﾊﾟﾅﾏ",
+    "ﾊﾟﾗｸﾞｱ",
+    "ﾌﾗﾝｽ",
+    "ﾌﾞﾗｼﾞﾙ",
+    "ﾍﾞﾙｷﾞｰ",
+    "ﾎﾞｽﾆｱ",
+    "ﾎﾟﾙﾄｶﾞ",
+    "ﾒｷｼｺ",
+    "ﾓﾛｯｺ",
+    "ﾖﾙﾀﾞﾝ"
+  ],
+  "fuzzy_candidates": {
+    "いわき": [
+      {
+        "candidate": "いわきFC",
+        "score": 0.75
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.3077
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      }
+    ],
+    "今治": [
+      {
+        "candidate": "FC今治",
+        "score": 0.6667
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC岐阜",
+        "score": 0.0
+      }
+    ],
+    "八戸": [
+      {
+        "candidate": "水戸",
+        "score": 0.5
+      },
+      {
+        "candidate": "神戸",
+        "score": 0.5
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.4
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "南ｱﾌﾘｶ": [
+      {
+        "candidate": "湘南",
+        "score": 0.2857
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1538
+      },
+      {
+        "candidate": "レノファ山口FC",
+        "score": 0.1538
+      }
+    ],
+    "宮崎": [
+      {
+        "candidate": "大宮",
+        "score": 0.5
+      },
+      {
+        "candidate": "川崎F",
+        "score": 0.4
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.3636
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.2
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      }
+    ],
+    "山口": [
+      {
+        "candidate": "富山",
+        "score": 0.5
+      },
+      {
+        "candidate": "山形",
+        "score": 0.5
+      },
+      {
+        "candidate": "岡山",
+        "score": 0.5
+      },
+      {
+        "candidate": "レノファ山口FC",
+        "score": 0.4
+      },
+      {
+        "candidate": "松本山雅FC",
+        "score": 0.25
+      }
+    ],
+    "日本": [
+      {
+        "candidate": "熊本",
+        "score": 0.5
+      },
+      {
+        "candidate": "松本山雅FC",
+        "score": 0.25
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      }
+    ],
+    "栃木Ｃ": [
+      {
+        "candidate": "栃木SC",
+        "score": 0.8571
+      },
+      {
+        "candidate": "栃木シティ",
+        "score": 0.5
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.3333
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.2857
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.2857
+      }
+    ],
+    "滋賀": [
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC岐阜",
+        "score": 0.0
+      }
+    ],
+    "琉球": [
+      {
+        "candidate": "FC琉球",
+        "score": 0.6667
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      }
+    ],
+    "相模原": [
+      {
+        "candidate": "SC相模原",
+        "score": 0.75
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      }
+    ],
+    "福島": [
+      {
+        "candidate": "広島",
+        "score": 0.5
+      },
+      {
+        "candidate": "徳島",
+        "score": 0.5
+      },
+      {
+        "candidate": "福岡",
+        "score": 0.5
+      },
+      {
+        "candidate": "鹿島",
+        "score": 0.5
+      },
+      {
+        "candidate": "福島ユナイテッドFC",
+        "score": 0.3333
+      }
+    ],
+    "藤枝": [
+      {
+        "candidate": "藤枝MYFC",
+        "score": 0.5
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      }
+    ],
+    "長崎": [
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.4
+      },
+      {
+        "candidate": "川崎F",
+        "score": 0.4
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1818
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.1818
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "韓国": [
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC岐阜",
+        "score": 0.0
+      }
+    ],
+    "高知": [
+      {
+        "candidate": "高知ユナイテッドSC",
+        "score": 0.3333
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      }
+    ],
+    "鳥取": [
+      {
+        "candidate": "鳥栖",
+        "score": 0.5
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.4444
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      }
+    ],
+    "鹿児島": [
+      {
+        "candidate": "鹿島",
+        "score": 0.8
+      },
+      {
+        "candidate": "鹿児島ユナイテッドFC",
+        "score": 0.4286
+      },
+      {
+        "candidate": "広島",
+        "score": 0.4
+      },
+      {
+        "candidate": "徳島",
+        "score": 0.4
+      },
+      {
+        "candidate": "福島ユナイテッドFC",
+        "score": 0.1538
+      }
+    ],
+    "ｱﾒﾘｶ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1667
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1667
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      }
+    ],
+    "ｱﾙｼﾞｪﾘ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.3077
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.2667
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1429
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.1429
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "ｱﾙｾﾞﾝﾁ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.3077
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.1538
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1429
+      }
+    ],
+    "ｲﾝｸﾞﾗﾝ": [
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.3077
+      },
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.2
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      }
+    ],
+    "ｳｽﾞﾍﾞｷ": [
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC岐阜",
+        "score": 0.0
+      }
+    ],
+    "ｳﾙｸﾞｱｲ": [
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.2857
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1667
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.1333
+      },
+      {
+        "candidate": "福島ユナイテッドFC",
+        "score": 0.1333
+      }
+    ],
+    "ｴｸｱﾄﾞﾙ": [
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.2
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1538
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1429
+      }
+    ],
+    "ｴｼﾞﾌﾟﾄ": [
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1818
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.1429
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "ｵｰｽﾄﾗﾘ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.2857
+      },
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1538
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1429
+      }
+    ],
+    "ｵｰｽﾄﾘｱ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1538
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1429
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1429
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1429
+      }
+    ],
+    "ｵﾗﾝﾀﾞ": [
+      {
+        "candidate": "ギラヴァンツ北九州",
+        "score": 0.3077
+      },
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.2222
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1818
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1667
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1667
+      }
+    ],
+    "ｶｰﾎﾞﾍﾞ": [
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.3333
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1818
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.1667
+      }
+    ],
+    "ｶﾀｰﾙ": [
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.5
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1818
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1667
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1667
+      }
+    ],
+    "ｶﾅﾀﾞ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.2
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1818
+      },
+      {
+        "candidate": "福島ユナイテッドFC",
+        "score": 0.1538
+      },
+      {
+        "candidate": "高知ユナイテッドSC",
+        "score": 0.1538
+      },
+      {
+        "candidate": "鹿児島ユナイテッドFC",
+        "score": 0.1429
+      }
+    ],
+    "ｶﾞｰﾅ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.4
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.2
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1818
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.1818
+      }
+    ],
+    "ｷｭﾗｿｰ": [
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.3077
+      },
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.2
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      }
+    ],
+    "ｸﾛｱﾁｱ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.3077
+      },
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.2
+      },
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1538
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1429
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.1429
+      }
+    ],
+    "ｺｰﾄｼﾞﾎ": [
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.2667
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1538
+      }
+    ],
+    "ｺﾛﾝﾋﾞｱ": [
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.1538
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1429
+      }
+    ],
+    "ｺﾝｺﾞ": [
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.2
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ギラヴァンツ北九州",
+        "score": 0.1667
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      }
+    ],
+    "ｻｳｼﾞ": [
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1818
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.1667
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.1538
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "ｽｲｽ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.2
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1818
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1667
+      },
+      {
+        "candidate": "福島ユナイテッドFC",
+        "score": 0.1538
+      }
+    ],
+    "ｽｳｪﾃﾞﾝ": [
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1538
+      },
+      {
+        "candidate": "ヴァンラーレ八戸",
+        "score": 0.1538
+      }
+    ],
+    "ｽｺｯﾄﾗﾝ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.2857
+      },
+      {
+        "candidate": "ギラヴァンツ北九州",
+        "score": 0.2667
+      },
+      {
+        "candidate": "奈良クラブ",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1538
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1429
+      }
+    ],
+    "ｽﾍﾟｲﾝ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1818
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1818
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1667
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1667
+      }
+    ],
+    "ｾﾈｶﾞﾙ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1818
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1667
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1538
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.1429
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "ﾁｪｺ": [
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC岐阜",
+        "score": 0.0
+      }
+    ],
+    "ﾁｭﾆｼﾞｱ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      },
+      {
+        "candidate": "テゲバジャーロ宮崎",
+        "score": 0.1429
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.1333
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.0
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      }
+    ],
+    "ﾄﾙｺ": [
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1818
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1667
+      },
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.1538
+      },
+      {
+        "candidate": "C大阪",
+        "score": 0.0
+      },
+      {
+        "candidate": "FC今治",
+        "score": 0.0
+      }
+    ],
+    "ﾄﾞｲﾂ": [
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.2
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.2
+      },
+      {
+        "candidate": "ザスパクサツ群馬",
+        "score": 0.1818
+      },
+      {
+        "candidate": "AC長野パルセイロ",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ギラヴァンツ北九州",
+        "score": 0.1667
+      }
+    ],
+    "ﾆｭｰｼﾞｰ": [
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.2667
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "カマタマーレ讃岐",
+        "score": 0.1538
+      }
+    ],
+    "ﾉﾙｳｪｰ": [
+      {
+        "candidate": "いわてグルージャ盛岡",
+        "score": 0.2667
+      },
+      {
+        "candidate": "ガイナーレ鳥取",
+        "score": 0.1667
+      },
+      {
+        "candidate": "ツエーゲン金沢",
+        "score": 0.1667
+      },
+      {
+        "candidate": "V・ファーレン長崎",
+        "score": 0.1538
+      },
+      {
+        "candidate": "アスルクラロ沼津",
+        "score": 0.1538
+      }
+    ]
+  }
+}

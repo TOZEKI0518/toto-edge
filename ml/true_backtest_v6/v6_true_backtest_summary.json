@@ -1,0 +1,32 @@
+{
+  "round_from": 1276,
+  "round_to": 1601,
+  "rounds_evaluated": 176,
+  "matches_evaluated": 2073,
+  "rf_accuracy": 0.3854317414375302,
+  "lgbm_accuracy": 0.3791606367583213,
+  "ensemble_accuracy": 0.39122045344910755,
+  "models_agree_rate": 0.6975397973950795,
+  "average_best_hits": 6.517045454545454,
+  "average_match_count": 11.778409090909092,
+  "exact_ticket_rounds": 9,
+  "one_miss_or_better_rounds": 20,
+  "two_miss_or_better_rounds": 26,
+  "total_investment_yen": 875900,
+  "confidence": {
+    "HIGH": {
+      "rows": 286,
+      "ensemble_accuracy": 0.44405594405594406
+    },
+    "MEDIUM": {
+      "rows": 863,
+      "ensemble_accuracy": 0.39745075318655854
+    },
+    "LOW": {
+      "rows": 924,
+      "ensemble_accuracy": 0.36904761904761907
+    }
+  },
+  "monetary_roi": null,
+  "monetary_roi_note": "Historical payout data is not connected yet. Accuracy and 50-ticket hit counts are true out-of-sample v6 results."
+}

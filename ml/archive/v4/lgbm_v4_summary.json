@@ -1,0 +1,30 @@
+{
+  "rows": 463,
+  "round_from": 1515,
+  "round_to": 1632,
+  "candidate_features": 169,
+  "parameters": {
+    "n_estimators": 800,
+    "learning_rate": 0.03,
+    "num_leaves": 31,
+    "max_depth": -1,
+    "min_child_samples": 20,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_alpha": 0.1,
+    "reg_lambda": 0.1
+  },
+  "metrics": {
+    "model": "RandomForest v4",
+    "rows": 318,
+    "accuracy": 0.3584905660377358,
+    "macro_f1": 0.31427029866117945,
+    "weighted_f1": 0.34990627135700175,
+    "log_loss": 1.9451931896607402,
+    "draw_precision": 0.14893617021276595,
+    "draw_recall": 0.10606060606060606,
+    "draw_f1": 0.12389380530973451,
+    "away_recall": 0.43859649122807015,
+    "home_recall": 0.41304347826086957
+  }
+}

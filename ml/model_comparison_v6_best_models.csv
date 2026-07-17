@@ -1,0 +1,8 @@
+﻿metric,best_model,best_value
+Accuracy,RandomForest v6,0.3811639271434918
+Macro F1,LightGBM v6,0.3563439460142167
+Weighted F1,LightGBM v6,0.3677801002261823
+Log Loss,RandomForest v6,1.09215222290001
+Away F1,RandomForest v5,0.3505509641873278
+Draw F1,LightGBM v6,0.2804617357845233
+Home F1,RandomForest v6,0.4866372298396467

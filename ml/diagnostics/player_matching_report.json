@@ -1,0 +1,12 @@
+{
+  "training_rows": 1187,
+  "matched_rows": 79,
+  "unmatched_rows": 1108,
+  "match_rate": 0.06655433866891322,
+  "reasons": {
+    "team_not_in_player_data": 685,
+    "home_away_reversed": 419,
+    "matched_by_team_date": 79,
+    "missing_training_date": 4
+  }
+}
